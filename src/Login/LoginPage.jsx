@@ -15,7 +15,7 @@ function LoginPage() {
             <div className="container ">
                 <h5 class="form-login container-mio ">Iniciar sesión</h5>
                 <div className="row">
-                    <input className="controls subir" type="text" name="usuario" value="" placeholder="Nombre de usuario" />
+                    <input className="controls subir" type="text" name="io" value="" placeholder="Nombre de usuario" />
                 </div>
                 <div className="row">
                     <input className="controls subir1" type="password" name="contrasena" value="" placeholder="Contraseña" />
