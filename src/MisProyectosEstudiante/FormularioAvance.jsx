@@ -26,10 +26,8 @@ function FormularioAvance() {
 
   return (
     <Fragment>
-      <h2 className="te">Registrar Avances  </h2>
-      <div className="row">
-        <div className="col "></div>
-      </div>
+      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Registrar Avances  </h2>
+      <div className="row"style={{ padding:'5%',paddingTop:'1%', paddingBottom:'1%' }}>
       <hr className="lin"></hr>
       <table className="table row1">
         {" "}
@@ -51,7 +49,8 @@ function FormularioAvance() {
       
       </tbody>
       </table>
-      <Button variant="dark" style={{ marginLeft:'40%' }} >Guardar Cambios </Button>
+      </div>
+      <Button variant="dark" style={{ marginLeft:'44%' }} >Guardar Cambios </Button>
     </Fragment>
     
   );

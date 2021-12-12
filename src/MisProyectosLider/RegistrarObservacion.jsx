@@ -26,10 +26,10 @@ function RegistrarObservacion() {
 
   return (
     <Fragment>
-      <h2 className="te">Registrar Observaciones  </h2>
-      <div className="row">
-        <div className="col "></div>
-      </div>
+      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }} >Registrar Observaciones  </h2>
+      <div className="row" style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
+        
+    
       <hr className="lin"></hr>
       <table className="table row1">
         {" "}
@@ -51,6 +51,7 @@ function RegistrarObservacion() {
       
       </tbody>
       </table>
+      </div>
       <Button variant="dark" style={{ marginLeft:'40%' }} >Guardar Cambios </Button>
     </Fragment>
     

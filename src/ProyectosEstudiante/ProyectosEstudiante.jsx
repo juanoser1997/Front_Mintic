@@ -3,6 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import Accordion from "react-bootstrap/Accordion";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
+import "./ProyectosEstudiantes.Css"
 
 function ProyectosEstudiante() {
   const PROYECTOS = gql`
@@ -73,12 +74,11 @@ function ProyectosEstudiante() {
 
   return (
     <Fragment>
-      <h2 className="te">Proyectos Disponibles</h2>
-      <div className="row">
-        <div className="col ">
+      <h2 className="te" style={{ textAlign:'center', marginTop:'5%' }}>Proyectos Disponibles</h2>
+      <div className="row" style={{ padding:'5%',paddingTop:'0' }}>
+       
          
-        </div>
-      </div>
+       
       <hr className="lin"></hr>
       <table className="table row1">
         {" "}
@@ -90,6 +90,8 @@ function ProyectosEstudiante() {
         </thead>
         <tbody> {datosTabla}</tbody>
       </table>
+     
+      </div>
     </Fragment>
   );
 }

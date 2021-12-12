@@ -27,12 +27,10 @@ function FormularioProyecto() {
 
   return (
     <Fragment>
-      <h2 className="te"  style={{ textAlign:'center' }} >Registrar Proyecto </h2>
+      <h2 className="te"  style={{ textAlign:'center',marginTop:'3%' }} >Registrar Proyecto </h2>
     
-      <div className="row">
-        <div className="col "></div>
-      </div>
-      <div style={{ padding: '5%' }}>
+      <div className="row" style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
+    
       <Form>
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Nombre</Form.Label>
@@ -47,8 +45,9 @@ function FormularioProyecto() {
           <Form.Control type="password" placeholder="Objetivo Especifico" />
         </Form.Group>
       </Form>
-      <Button variant="dark" style={{ marginLeft:'40%' }} >Registrar </Button>
       </div>
+      <Button variant="dark" style={{ marginLeft:'44%' }} >Registrar </Button>
+     
     </Fragment>
     
   );

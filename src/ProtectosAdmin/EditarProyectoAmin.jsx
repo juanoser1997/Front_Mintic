@@ -34,10 +34,8 @@ function EditarProyectoAdmin() {
   console.log(data.getProjectId.nombre);
   return (
     <Fragment>
-      <h2 className="te">Editar Proyectos Admin </h2>
-      <div className="row">
-        <div className="col "></div>
-      </div>
+      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Editar Proyectos Admin </h2>
+      <div className="row"  style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
       <hr className="lin"></hr>
       <table className="table row1">
         {" "}
@@ -76,8 +74,9 @@ function EditarProyectoAdmin() {
          
         </tbody>
       </table>
+      </div>
 
-      <Button variant="dark" style={{ marginLeft:'40%' }} >Guardar Cambios </Button>
+      <Button variant="dark" style={{ marginLeft:'43%' }} >Guardar Cambios </Button>
     </Fragment>
   );
 }
