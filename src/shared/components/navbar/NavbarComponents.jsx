@@ -28,10 +28,15 @@ function NavbarComponents() {
             <li class="nav-item">
               <Link to="/misproyectos-home" class="nav-link nav" href="#">Mis proyectos</Link>
             </li>
-            <li class="nav-item">
-              <Link to="/forbbiden" class="nav-link nav" href="#">Usuarios</Link>
-            </li>
-            <li class="nav-item">
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Usuarios
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><Link to="/listar-usuarios" className="dropdown-item" href="#">Usuarios Registrados</Link></li>
+                <li><Link to="/listar-usuarios-estudiantes" className="dropdown-item" href="#">Estudiantes Registrados</Link></li>
+                
+              </ul>
             </li>
           </ul>
         </div>
@@ -46,11 +51,11 @@ function NavbarComponents() {
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
             <li><button class="dropdown-item navv" type="button" onClick={() => loginWithRedirect()}>{isAuthenticated ? user.nickname : "login"}</button></li>
-            
-              {isAuthenticated ? <li> <button class="dropdown-item navv" type="button" onClick={() => logout({returnTo: window.location.origin })}>Sign out</button>
 
-              </li> : null}
-            
+            {isAuthenticated ? <li> <button class="dropdown-item navv" type="button" onClick={() => logout({ returnTo: window.location.origin })}>Sign out</button>
+
+            </li> : null}
+
           </ul>
         </div>
       </div>
