@@ -24,6 +24,7 @@ import FormularioProyecto from "./MisProyectosLider/FormularioProyecto.jsx";
 import EditarProyecto from "./MisProyectosLider/EditarProyecto.jsx";
 import RegistrarObservacion from "./MisProyectosLider/RegistrarObservacion.jsx";
 import Inscripciones from "./MisProyectosLider/Inscripciones";
+import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
 
 
 function App() {
@@ -83,6 +84,10 @@ function App() {
      
         <Route path="/inscripciones" exact>
           <Inscripciones/>
+        </Route>
+     
+        <Route path="/lista-avances-lider" exact>
+          <ListaAvancesLider/>
         </Route>
      
       

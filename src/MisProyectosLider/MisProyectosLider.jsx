@@ -87,7 +87,7 @@ function MisProyectosLider() {
                 <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
 
            { estado_proyecto =='Activo'? <Link to={'editar-proyecto'}> <Button style={{ width:'100%' }}   onClickCapture={(e, id) => { handleEditar(_id); }} variant="dark">Editar Proyecto </Button> </Link> : <div></div> }
-              <Link to={'/registrar-observacion'}> <Button style={{ width:'100%' }}  variant="primary">Registrar Observacion </Button></Link> 
+              <Link to={'/lista-avances-lider'}> <Button style={{ width:'100%' }}  onClickCapture={(e, id) => { handleEditar(_id); }}  variant="primary"> Ver avances </Button></Link> 
               <Link to={'/inscripciones'}> <Button style={{ width:'100%' }} onClickCapture={(e, id) => { handleEditar(_id); }}  variant="dark">Mirar inscripciones </Button></Link> 
               </ListGroup>
             </Accordion.Body>
