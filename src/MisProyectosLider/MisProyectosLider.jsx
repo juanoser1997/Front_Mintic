@@ -9,6 +9,7 @@ function MisProyectosLider() {
   const PROYECTOS = gql`
     query {
       proyectos {
+        _id
         lider
         nombre
         presupuesto
@@ -19,6 +20,21 @@ function MisProyectosLider() {
       }
     }
   `;
+  const [idProyecto, setIdProyecto] = useState("");
+  
+  const handleEditar = (e) => {
+
+    setIdProyecto(String(e));
+    localStorage.setItem("idProyecto", String(e));
+    localStorage.getItem("idProyecto");
+    window.location.href = "/editar-proyecto";
+    console.log(e)
+  };
+  useEffect(() => {
+    setIdProyecto("");
+    localStorage.setItem("idProyecto", idProyecto);
+    localStorage.getItem("idProyecto");
+  },[] );
 
   const { loading, error, data } = useQuery(PROYECTOS);
   if (loading) return <h1>Cargando....</h1>;
@@ -26,6 +42,7 @@ function MisProyectosLider() {
 
   const datosTabla = data.proyectos.map(
     ({
+      _id,
       lider,
       nombre,
       presupuesto,
@@ -64,7 +81,7 @@ function MisProyectosLider() {
                 </ListGroup.Item>
                 <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
 
-              <Link to={'/editar-proyecto'} > <Button style={{ width:'100%' }} variant="dark">Editar Proyecto </Button></Link> 
+            <Button style={{ width:'100%' }}   onClickCapture={(e, id) => { handleEditar(_id); }} variant="dark">Editar Proyecto </Button>
               <Link to={'/registrar-observacion'}> <Button style={{ width:'100%' }}  variant="primary">Registrar Observacion </Button></Link> 
               </ListGroup>
             </Accordion.Body>
@@ -76,11 +93,11 @@ function MisProyectosLider() {
 
   return (
     <Fragment>
-      <h2 className="te">Mis Proyectos Lider </h2>
-      <Link to="/formulario-proyecto">  <Button variant="dark" style={{ marginLeft:'11%', borderRadius:'10px' }} > Crear Proyecto  </Button></Link>
-      <div className="row">
-        <div className="col "></div>
-      </div>
+      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Mis Proyectos Lider </h2>
+      <Link to="/formulario-proyecto">  <Button variant="dark" style={{ marginLeft:'7%', borderRadius:'10px' }} > Crear Proyecto  </Button></Link>
+      <div className="row" style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
+        
+     
       <hr className="lin"></hr>
       <table className="table row1">
         {" "}
@@ -92,6 +109,7 @@ function MisProyectosLider() {
         </thead>
         <tbody> {datosTabla}</tbody>
       </table>
+      </div>
     </Fragment>
   );
 }

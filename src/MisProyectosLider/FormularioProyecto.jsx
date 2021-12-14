@@ -23,6 +23,7 @@ const FormularioProyecto = () => {
     fase: ""
 
 
+
   }
 
   return (<div className="container"><h2 className="te" style={{ textAlign: 'center' }} >Registrar Proyecto </h2>
@@ -64,6 +65,8 @@ const FormularioProyecto = () => {
         </Form.Group>
       </div>
       <div>
+
+       
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Líder</Form.Label>
           <Form.Control type="text" input ref={lider => project.lider = lider} placeholder="Lider" />
@@ -86,10 +89,12 @@ const FormularioProyecto = () => {
           <Form.Label>Fase</Form.Label>
           <Form.Control type="text" input ref={fase => project.fase = fase} placeholder="Fase" />
         </Form.Group>
+
       </div>
       <div><Button variant="dark" type="submit" style={{ marginLeft: '40%' }} >Registrar Proyecto</Button></div>
     </form>
   </div>)
+
 }
 
 export default FormularioProyecto

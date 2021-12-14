@@ -108,14 +108,11 @@ const datosTabla = data.proyectos.map(
           return (
             <Fragment>
                
-           <h2 className="te" style={{ textAlign:'center' }} >Mis Avances</h2>
-         <Link to="/formulario-avance">  <Button variant="dark" style={{ marginLeft:'11%', borderRadius:'10px' }} > Nuevo Avance </Button></Link> 
+           <h2 className="te"  style={{ textAlign:'center',marginTop:'3%' }} >Mis Avances</h2>
+         <Link to="/formulario-avance">  <Button variant="dark" style={{ marginLeft:'7%', borderRadius:'10px' }} > Nuevo Avance </Button></Link> 
             
-            <div className="row">
-              <div className="col ">
-               
-              </div>
-            </div>
+            <div className="row"  style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
+           
             <hr className="lin"></hr>
             <table className="table row1">
               {" "}
@@ -127,6 +124,8 @@ const datosTabla = data.proyectos.map(
               </thead>
               <tbody> {datosTabla}</tbody>
             </table>
+             
+            </div>
           </Fragment>
         );
         

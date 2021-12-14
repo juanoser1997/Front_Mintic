@@ -75,10 +75,10 @@ function MisProyectosEstudiante() {
 
   return (
     <Fragment>
-      <h2 className="te">Mis Proyectos Estudiantes </h2>
-      <div className="row">
-        <div className="col "></div>
-      </div>
+      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Mis Proyectos Estudiantes </h2>
+      <div className="row" style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
+       
+     
       <hr className="lin"></hr>
       <table className="table row1">
         {" "}
@@ -90,6 +90,7 @@ function MisProyectosEstudiante() {
         </thead>
         <tbody> {datosTabla}</tbody>
       </table>
+      </div>
     </Fragment>
   );
 }

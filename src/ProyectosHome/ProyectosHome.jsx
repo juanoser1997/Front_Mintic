@@ -7,9 +7,9 @@ import ForbidenComponent from '../shared/components/fordiben/ForbidenComponent';
 
 function ProyectosHome() {
   const user = {
-    rol:'estudiante',
+    // rol:'estudiante',
     //  rol:'pendiente',
-    // rol:'administrador',
+    rol:'administrador',
     _id:'6195bf66eb635c2c3e729713'
   }
    if (user.rol === 'estudiante')
