@@ -135,6 +135,7 @@ function HomePage() {
                 <hr class="linea"></hr>
 
             <h2 className="te" style={{textAlign:"center"}}>BIENVENIDO AL SISTEMA DE GESTIÓN DE PROYECTOS DE INVESTIGACIÓN</h2>
+
             <div className="row">
               
             </div>

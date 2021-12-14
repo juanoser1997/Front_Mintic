@@ -11,7 +11,7 @@ function MisProyectosHome() {
     // rol:'estudiante',
     rol:'lider',
     // rol:'pendiente',
-    _id:'6195bf66eb635c2c3e729713'
+    _id:'6195bf66eb635c2c3e729713' 
   }
    if (user.rol === 'estudiante')
     return <MisProyectosEstudiante></MisProyectosEstudiante>;
