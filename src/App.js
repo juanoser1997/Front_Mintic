@@ -23,6 +23,7 @@ import MisProyectosLider from "./MisProyectosLider/MisProyectosLider.jsx";
 import FormularioProyecto from "./MisProyectosLider/FormularioProyecto.jsx";
 import EditarProyecto from "./MisProyectosLider/EditarProyecto.jsx";
 import RegistrarObservacion from "./MisProyectosLider/RegistrarObservacion.jsx";
+import Inscripciones from "./MisProyectosLider/Inscripciones";
 
 
 function App() {
@@ -78,6 +79,10 @@ function App() {
         </Route>
         <Route path="/registrar-observacion" exact>
           <RegistrarObservacion />
+        </Route>
+     
+        <Route path="/inscripciones" exact>
+          <Inscripciones/>
         </Route>
      
       

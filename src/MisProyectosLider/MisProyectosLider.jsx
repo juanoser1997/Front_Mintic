@@ -17,6 +17,7 @@ function MisProyectosLider() {
         objetivos_especificos
         fecha_inicio
         fase
+        estado_proyecto
       }
     }
   `;
@@ -27,7 +28,7 @@ function MisProyectosLider() {
     setIdProyecto(String(e));
     localStorage.setItem("idProyecto", String(e));
     localStorage.getItem("idProyecto");
-    window.location.href = "/editar-proyecto";
+    // window.location.href = "/editar-proyecto";
     console.log(e)
   };
   useEffect(() => {
@@ -50,6 +51,7 @@ function MisProyectosLider() {
       objetivos_especificos,
       fecha_inicio,
       fase,
+      estado_proyecto,
     }) => (
       <Fragment>
         <Accordion>
@@ -60,6 +62,9 @@ function MisProyectosLider() {
                 <ListGroup.Item as="li"> Lider : {lider} </ListGroup.Item>
                 <ListGroup.Item as="li">
                   Presupuesto : {presupuesto}
+                </ListGroup.Item>
+                <ListGroup.Item as="li">
+                 Estado : {estado_proyecto}
                 </ListGroup.Item>
                 <ListGroup.Item as="li">
                   Objetivos Generales : {objetivos_generales}
@@ -81,8 +86,9 @@ function MisProyectosLider() {
                 </ListGroup.Item>
                 <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
 
-            <Button style={{ width:'100%' }}   onClickCapture={(e, id) => { handleEditar(_id); }} variant="dark">Editar Proyecto </Button>
+           { estado_proyecto =='Activo'? <Link to={'editar-proyecto'}> <Button style={{ width:'100%' }}   onClickCapture={(e, id) => { handleEditar(_id); }} variant="dark">Editar Proyecto </Button> </Link> : <div></div> }
               <Link to={'/registrar-observacion'}> <Button style={{ width:'100%' }}  variant="primary">Registrar Observacion </Button></Link> 
+              <Link to={'/inscripciones'}> <Button style={{ width:'100%' }} onClickCapture={(e, id) => { handleEditar(_id); }}  variant="dark">Mirar inscripciones </Button></Link> 
               </ListGroup>
             </Accordion.Body>
           </Accordion.Item>

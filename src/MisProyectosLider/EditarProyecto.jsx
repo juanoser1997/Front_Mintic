@@ -87,7 +87,7 @@ function agregarObjetivo(){
                 nombre: project.nombre.value,
                 _id: idProyecto,
             }});
-            // window.location.href = "/misproyectos-home";
+            window.location.href = "/misproyectos-home";
             console.log(project)
         }}>
         <Form.Group className="mb-3" controlId="formGroupEmail">

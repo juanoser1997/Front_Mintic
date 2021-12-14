@@ -134,7 +134,7 @@ function HomePage() {
 
                 <hr class="linea"></hr>
 
-            <h2 className="te" style={{textAlign:"center"}}>BIENVENIDO A MOTOSERVICE</h2>
+            <h2 className="te" style={{textAlign:"center"}}>BIENVENIDOS!</h2>
             <div className="row">
               
             </div>
