@@ -28,8 +28,6 @@ import ListarUsuariosEstudiantes from "./ListarUsuariosEstudiantes/ListarUsuario
 import Inscripciones from "./MisProyectosLider/Inscripciones";
 import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
 import MiUsuario from "./MiUsuario/MiUsuario";
-
-
 import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
 
 
