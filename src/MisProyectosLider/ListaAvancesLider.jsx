@@ -6,7 +6,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { useQuery, gql } from "@apollo/client";
 
-function ListaAvances() {
+function ListaAvancesLider() {
   let idProyecto = localStorage.getItem("idProyecto");
   const PROYECTOS = gql`
     query getPojectId($idProyecto: String!) {
@@ -61,7 +61,7 @@ function ListaAvances() {
                 {new Date(avance.fecha_avance).toLocaleDateString()}
               </ListGroup.Item>
 
-              <Link to={"/formulario-avance"}>
+              <Link to={"/registrar-observacion"}>
                 {" "}
                 <Button
                   style={{ width: "100%" }}
@@ -71,7 +71,7 @@ function ListaAvances() {
                   }}
                 >
                   {" "}
-                  Editar avance
+                  Agregar observacion
                 </Button>
               </Link>
               {/* <Link onClickCapture={(e, id) => { handleEditar(_id); }} to="/editar-proyecto-admin">  <Button style={{ width:'100%' }} variant="dark" >Editar</Button></Link>  */}
@@ -96,7 +96,7 @@ function ListaAvances() {
             <h2 className="te" style={{ textAlign: "center", marginTop: "3%" }}>
               Avances proyecto {data.getProjectId.nombre}{" "}
             </h2>
-            <Link to="/crear-avance">  <Button variant="dark" style={{ marginLeft:'7%', borderRadius:'10px' }} > Crear Avance  </Button></Link>
+
             <div
               className="row"
               style={{ padding: "5%", paddingTop: "1%", paddingBottom: "3%" }}
@@ -127,4 +127,4 @@ function ListaAvances() {
   );
 }
 
-export default ListaAvances;
+export default ListaAvancesLider;

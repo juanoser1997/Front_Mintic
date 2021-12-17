@@ -25,6 +25,11 @@ import EditarProyecto from "./MisProyectosLider/EditarProyecto.jsx";
 import RegistrarObservacion from "./MisProyectosLider/RegistrarObservacion.jsx";
 import ListarUsuarios from "./ListarUsuarios/ListarUsuarios";
 import ListarUsuariosEstudiantes from "./ListarUsuariosEstudiantes/ListarUsuariosEstudiantes";
+import Inscripciones from "./MisProyectosLider/Inscripciones";
+import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
+import MiUsuario from "./MiUsuario/MiUsuario";
+import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
+
 
 function App() {
   
@@ -65,6 +70,12 @@ function App() {
           <ProyectosHome />
 
         </Route>
+
+        <Route path="/mi-usuario" exact>
+          <MiUsuario />
+
+        </Route>
+
         <Route path="/misproyectos-home" exact>
           <MisProyectosHome />
         </Route>
@@ -80,12 +91,28 @@ function App() {
         <Route path="/registrar-observacion" exact>
           <RegistrarObservacion />
         </Route>
+
         <Route path="/listar-usuarios" exact>
           <ListarUsuarios />
         </Route>
         <Route path="/listar-usuarios-estudiantes" exact>
           <ListarUsuariosEstudiantes />
         </Route>
+
+     
+        <Route path="/inscripciones" exact>
+          <Inscripciones/>
+        </Route>
+     
+        <Route path="/lista-avances-lider" exact>
+          <ListaAvancesLider/>
+        </Route>
+        <Route path="/crear-avance" exact>
+          <CrearAvance></CrearAvance>
+        </Route>
+     
+      
+
         <Route path="/forbbiden" exact>
           <ForbidenComponent />
 

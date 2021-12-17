@@ -109,14 +109,12 @@ const datosTabla = data.proyectos.map(
           return (
             <Fragment>
                
-           <h2 className="te" style={{ textAlign:'center' }} >Proyectos Disponibles</h2>
-         <Link to="/editar-proyecto-admin-pendiente">  <Button variant="dark" style={{ marginLeft:'11%', borderRadius:'10px' }} > Proyectos pendientes </Button></Link> 
+           <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }} >Proyectos Disponibles</h2>
+         <Link to="/editar-proyecto-admin-pendiente">  <Button variant="dark" style={{ marginLeft:'6%', borderRadius:'10px' }} > Proyectos pendientes </Button></Link> 
             
-            <div className="row">
-              <div className="col ">
-               
-              </div>
-            </div>
+            <div className="row" style={{ padding:'5%',paddingTop:'1%' }}>
+             
+         
             <hr className="lin"></hr>
             <table className="table row1">
               {" "}
@@ -128,6 +126,7 @@ const datosTabla = data.proyectos.map(
               </thead>
               <tbody> {datosTabla}</tbody>
             </table>
+            </div>
           </Fragment>
         );
         
