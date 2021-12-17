@@ -28,6 +28,9 @@ function NavbarComponents() {
             <li class="nav-item">
               <Link to="/misproyectos-home" class="nav-link nav" href="#">Mis proyectos</Link>
             </li>
+            <li class="nav-item">
+              <Link to="/mi-usuario" class="nav-link nav" href="#">Mi Usuario</Link>
+            </li>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Usuarios
@@ -35,7 +38,8 @@ function NavbarComponents() {
               <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><Link to="/listar-usuarios" className="dropdown-item" href="#">Usuarios Registrados</Link></li>
                 <li><Link to="/listar-usuarios-estudiantes" className="dropdown-item" href="#">Estudiantes Registrados</Link></li>
-                
+            
+
               </ul>
             </li>
           </ul>
