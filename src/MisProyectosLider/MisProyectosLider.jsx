@@ -6,20 +6,36 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 function MisProyectosLider() {
+  var nombre_lider = "Andres"
   const PROYECTOS = gql`
-    query {
-      proyectos {
-        _id
-        lider
+    query findLiderProjects($nombre_lider: String!) {
+      findLiderProjects(lider: $nombre_lider) {
         nombre
-        presupuesto
         objetivos_generales
-        objetivos_especificos
-        fecha_inicio
-        fase
         estado_proyecto
+        objetivos_especificos
+        presupuesto
+        lider
+        fase
+        _id
+        fecha_inicio
+        inscripciones {
+          estado
+          id_inscripcion
+          id_estudiante
+          fecha_ingreso
+          fecha_egreso
+          
+      }
+      avances {
+        id_avance
+        fecha_avance
+        descripcion
+        observaciones_lider
+      }
       }
     }
+
   `;
   const [idProyecto, setIdProyecto] = useState("");
   
@@ -37,11 +53,13 @@ function MisProyectosLider() {
     localStorage.getItem("idProyecto");
   },[] );
 
-  const { loading, error, data } = useQuery(PROYECTOS);
+  const { loading, error, data } = useQuery(PROYECTOS, {
+    variables: { nombre_lider },
+  });
   if (loading) return <h1>Cargando....</h1>;
   if (error) return <h1>Error</h1>;
 
-  const datosTabla = data.proyectos.map(
+  const datosTabla = data.findLiderProjects.map(
     ({
       _id,
       lider,
@@ -52,6 +70,8 @@ function MisProyectosLider() {
       fecha_inicio,
       fase,
       estado_proyecto,
+      avances,
+      inscripciones,
     }) => (
       <Fragment>
         <Accordion>
@@ -76,6 +96,36 @@ function MisProyectosLider() {
                       <ul>
                         {" "}
                         <li> {objetivo_especifico}</li>
+                      </ul>
+                    );
+                  })}
+                </ListGroup.Item>
+                <ListGroup.Item as="li">
+                 Avances :{" "}
+                  {avances.map((avance) => {
+                    return (
+                      <ul>
+                        {" "}
+                     <b> Avance {avance.id_avance} </b> 
+                        <li>  Descripcion : {avance.descripcion} </li>
+                        <li> Observaciones : {avance.observaciones_lider} </li>
+                        <li>  Fecha :  { new Date(avance.fecha_avance).toLocaleString()} </li>
+                      </ul>
+                    );
+                  })}
+                </ListGroup.Item>
+                <ListGroup.Item as="li">
+                Inscripciones :{" "}
+                  {inscripciones.map((inscripcion) => {
+                    return (
+                      <ul>
+                        {" "}
+                      <b> Inscripcion {inscripcion.id_inscripcion} </b>
+                        <li>  Identificacion Estudiante : {inscripcion.id_estudiante} </li>
+                        <li> Estado : {inscripcion.estado} </li>
+                        <li>  Fecha Ingreso :  { new Date(inscripcion.fecha_ingreso).toLocaleString()} </li>
+                        <li>  Fecha Egreso :  { new Date(inscripcion.fecha_egreso).toLocaleString()} </li>
+
                       </ul>
                     );
                   })}

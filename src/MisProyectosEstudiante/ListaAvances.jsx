@@ -1,141 +1,130 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { ElementContext } from "../context/elementContext";
 import Accordion from "react-bootstrap/Accordion";
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button"; 
+import Button from "react-bootstrap/Button";
 import { useQuery, gql } from "@apollo/client";
 
-
-
-function ListaAvances () {
-  const [idProyecto, setIdProyecto] = useState("");
- const handleEditar = (e) => {
-    setIdProyecto(String(e));
-    localStorage.setItem("idProyecto", String(e));
-    localStorage.getItem("idProyecto");
-    window.location.href = "/formulario-avance";
-    console.log(e)
-  };
+function ListaAvances() {
+  let idProyecto = localStorage.getItem("idProyecto");
   const PROYECTOS = gql`
-  query {
-    proyectos {
-      _id
-      lider
-      nombre
-      presupuesto
-      objetivos_generales
-      objetivos_especificos
-      fecha_inicio
-      fase
+    query getPojectId($idProyecto: String!) {
+      getProjectId(_id: $idProyecto) {
+        nombre
+        avances {
+          id_avance
+          fecha_avance
+          descripcion
+          observaciones_lider
+        }
+      }
     }
-  }
-`;
+  `;
 
-useEffect(() => {
-  setIdProyecto("");
-  localStorage.setItem("idProyecto", idProyecto);
-  localStorage.getItem("idProyecto");
-},[] );
+  const [idAvance, setIdAvance] = useState("");
 
-const { loading, error, data } = useQuery(PROYECTOS);
-if (loading) return <h1>Cargando....</h1>;
+  const handleRegistrar = (e) => {
+    setIdAvance(String(e));
+    localStorage.setItem("idAvance", String(e));
+    localStorage.getItem("idAvance");
+    // window.location.href = "/editar-proyecto";
+    console.log(e);
+  };
 
-const datosTabla = data.proyectos.map(
-  ({
-    _id,
-    lider,
-    nombre,
-    presupuesto,
-    objetivos_generales,
-    objetivos_especificos,
-    fecha_inicio,
-    fase,
-  }) => (
+  useEffect(() => {
+    setIdAvance("");
+    localStorage.setItem("idAvance", idAvance);
+    localStorage.getItem("idAvance");
+  }, []);
+  const { loading, error, data } = useQuery(PROYECTOS, {
+    variables: { idProyecto },
+  });
+
+  if (loading) return <h1>Cargando....</h1>;
+
+  const datosTabla = data.getProjectId.avances.map((avance) => (
     <Fragment>
       <Accordion>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>{nombre}</Accordion.Header>
+          <Accordion.Header> Avance {avance.id_avance}</Accordion.Header>
           <Accordion.Body>
             <ListGroup as="ol" numbered>
-              <ListGroup.Item as="li"> Lider : {lider} </ListGroup.Item>
               <ListGroup.Item as="li">
-                Presupuesto : {presupuesto}
+                <b> Descripción :</b> {avance.descripcion}
               </ListGroup.Item>
               <ListGroup.Item as="li">
-                Objetivos Generales : {objetivos_generales}
+                <b> Observaciones del Lider :</b> {avance.observaciones_lider}
               </ListGroup.Item>
               <ListGroup.Item as="li">
-                Objetivos especificos :{" "}
-                {objetivos_especificos.map((objetivo_especifico) => {
-                  return (
-                    <ul>
-                      {" "}
-                      <li> {objetivo_especifico}</li>
-                    </ul>
-                  );
-                })}
+                <b> Fecha de Avance :</b>{" "}
+                {new Date(avance.fecha_avance).toLocaleDateString()}
               </ListGroup.Item>
-              <ListGroup.Item as="li">
-                Fecha de inicio :{" "}
-                {new Date(fecha_inicio).toLocaleDateString()}
-              </ListGroup.Item>
-              <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
-          {/* <Link onClickCapture={(e, id) => { handleEditar(_id); }} to="/editar-proyecto-admin">  <Button style={{ width:'100%' }} variant="dark" >Editar</Button></Link>  */}
-           <Button style={{ width:'100%' }} variant="dark"   onClickCapture={(e, id) => { handleEditar(_id); }}>Editar Avance</Button>
+
+              <Link to={"/formulario-avance"}>
+                {" "}
+                <Button
+                  style={{ width: "100%" }}
+                  variant="dark"
+                  onClickCapture={(e, id) => {
+                    handleRegistrar(avance.id_avance);
+                  }}
+                >
+                  {" "}
+                  Editar avance
+                </Button>
+              </Link>
+              {/* <Link onClickCapture={(e, id) => { handleEditar(_id); }} to="/editar-proyecto-admin">  <Button style={{ width:'100%' }} variant="dark" >Editar</Button></Link>  */}
             </ListGroup>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
     </Fragment>
-  )
-);
+  ));
 
+  return (
+    <ElementContext.Consumer>
+      {(context) => {
+        const { radio0value, radio1value, radio2value, initialBoxvalue } =
+          context;
+        console.log(radio2value);
+        console.log(radio1value);
+        console.log(radio0value);
 
-   
-        
-        
-        
-    return ( 
-       
-        <ElementContext.Consumer>
-        {(context) => {
-             const {radio0value,radio1value,radio2value,initialBoxvalue}=context;
-             console.log(radio2value);
-                 console.log(radio1value);
-                 console.log(radio0value);
-         
-          return (
-            <Fragment>
-               
-           <h2 className="te"  style={{ textAlign:'center',marginTop:'3%' }} >Mis Avances</h2>
-         <Link to="/formulario-avance">  <Button variant="dark" style={{ marginLeft:'7%', borderRadius:'10px' }} > Nuevo Avance </Button></Link> 
-            
-            <div className="row"  style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
-           
-            <hr className="lin"></hr>
-            <table className="table row1">
-              {" "}
-              <thead className="table-dark">
+        return (
+          <Fragment>
+            <h2 className="te" style={{ textAlign: "center", marginTop: "3%" }}>
+              Avances proyecto {data.getProjectId.nombre}{" "}
+            </h2>
+            <Link to="/crear-avance">  <Button variant="dark" style={{ marginLeft:'7%', borderRadius:'10px' }} > Crear Avance  </Button></Link>
+            <div
+              className="row"
+              style={{ padding: "5%", paddingTop: "1%", paddingBottom: "3%" }}
+            >
+              <hr className="lin"></hr>
+              <table className="table row1">
                 {" "}
-                <tr>
-                  <th scope="col">Proyectos </th>
-                </tr>
-              </thead>
-              <tbody> {datosTabla}</tbody>
-            </table>
-             
+                <thead className="table-dark">
+                  {" "}
+                  <tr>
+                    <th scope="col">Avances </th>
+                  </tr>
+                </thead>
+                <tbody> {datosTabla}</tbody>
+              </table>
+
+              <Link to={"/misproyectos-lider"}>
+                {" "}
+                <Button style={{ marginLeft: "43%" }} variant="dark">
+                  volver{" "}
+                </Button>
+              </Link>
             </div>
           </Fragment>
         );
-        
-        }}
-      </ElementContext.Consumer>
-          
-
-       
-    );
-    
+      }}
+    </ElementContext.Consumer>
+  );
 }
 
 export default ListaAvances;
