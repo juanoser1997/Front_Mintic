@@ -47,10 +47,10 @@ const Usuario = ({ user }) => {
         <td>{user.estado}</td>
         <td>{user.correo}</td>
         <td>{user.tipo_usuario}</td>
-        <td><Button variant="dark" style={{ marginLeft:'9%', borderRadius:'10px' }} onClick={activarUser}>Autorizar</Button>
+        <td><Button variant="dark" style={{ marginLeft:'2%', borderRadius:'10px' }} onClick={activarUser}>Autorizar</Button>
         
             {/* <button className="btn btn-primary" onClick={eliminarUser}>No autorizar</button></td> */}
-            <Button variant="dark" style={{ marginLeft:'9%', borderRadius:'10px' }} onClick={inactivarUser}>No Autorizar</Button></td>
+            <Button variant="dark" style={{ marginLeft:'2%', borderRadius:'10px' }} onClick={inactivarUser}>No Autorizar</Button></td>
     </tr>
 }
 

@@ -27,6 +27,7 @@ import ListarUsuarios from "./ListarUsuarios/ListarUsuarios";
 import ListarUsuariosEstudiantes from "./ListarUsuariosEstudiantes/ListarUsuariosEstudiantes";
 import Inscripciones from "./MisProyectosLider/Inscripciones";
 import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
+import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
 
 
 function App() {
@@ -98,6 +99,9 @@ function App() {
      
         <Route path="/lista-avances-lider" exact>
           <ListaAvancesLider/>
+        </Route>
+        <Route path="/crear-avance" exact>
+          <CrearAvance></CrearAvance>
         </Route>
      
       

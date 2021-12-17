@@ -16,9 +16,32 @@ function MisProyectosEstudiante() {
         objetivos_especificos
         fecha_inicio
         fase
+        _id
       }
     }
   `;
+  const [idProyecto, setIdProyecto] = useState("");
+  const [nombre, setNombre] = useState("");
+  const handleEditar = (e,nombre) => {
+
+    setIdProyecto(String(e));
+    localStorage.setItem("idProyecto", String(e));
+    localStorage.getItem("idProyecto");
+
+    setNombre(String(nombre));
+    localStorage.setItem("nombre", String(nombre));
+    localStorage.getItem("nombre");
+    // window.location.href = "/editar-proyecto";
+    console.log(e)
+  };
+  useEffect(() => {
+    setIdProyecto("");
+    localStorage.setItem("idProyecto", idProyecto);
+    localStorage.getItem("idProyecto");
+    setNombre("");
+    localStorage.setItem("nombre", nombre);
+    localStorage.getItem("nombre");
+  },[] );
 
   const { loading, error, data } = useQuery(PROYECTOS);
   if (loading) return <h1>Cargando....</h1>;
@@ -33,6 +56,7 @@ function MisProyectosEstudiante() {
       objetivos_especificos,
       fecha_inicio,
       fase,
+      _id
     }) => (
       <Fragment>
         <Accordion>
@@ -64,7 +88,7 @@ function MisProyectosEstudiante() {
                 </ListGroup.Item>
                 <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
 
-                <Link to={'/lista-avances'} > <Button  style={{ width:'100%' }} variant="dark">Mirar Avances </Button></Link>
+                <Link to={'/lista-avances'} > <Button   onClickCapture={(e, id) => { handleEditar(_id, nombre); }} style={{ width:'100%' }} variant="dark">Mirar Avances </Button></Link>
               </ListGroup>
             </Accordion.Body>
           </Accordion.Item>
