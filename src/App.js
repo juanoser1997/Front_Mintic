@@ -29,6 +29,7 @@ import Inscripciones from "./MisProyectosLider/Inscripciones";
 import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
 import MiUsuario from "./MiUsuario/MiUsuario";
 import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
+import UsuariosHome from "./UsuariosHome/UsuariosHome";
 
 
 function App() {
@@ -97,6 +98,9 @@ function App() {
         </Route>
         <Route path="/listar-usuarios-estudiantes" exact>
           <ListarUsuariosEstudiantes />
+        </Route>
+        <Route path="/usuarios-home" exact>
+          <UsuariosHome />
         </Route>
 
      

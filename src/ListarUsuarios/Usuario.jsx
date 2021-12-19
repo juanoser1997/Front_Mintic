@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client"
 import gql from "graphql-tag"
 import Button from "react-bootstrap/Button";
 
-const Usuario = ({ user }) => {
+const Usuario = ({ user , control}) => {
 
     /*
         mutation{
@@ -31,14 +31,26 @@ const Usuario = ({ user }) => {
 
     const activarUser = () => {
         activar({ variables: { identificacion: user.identificacion } })
+        if (control == "estudiantes")
+        window.location.href = "/listar-usuarios-estudiantes";
+        if (control == "usuarios")
+        window.location.href = "/listar-usuarios";
+        alert("Usted Ha autorizado al " +  user.tipo_usuario+ " "  + user.nombre_completo)
     }
 
     const eliminarUser = () => {
         eliminar({ variables: { ident: user.identificacion } })
+        
+
     }
 
     const inactivarUser = () => {
         inactivar({ variables: { ide: user.identificacion } })
+        if (control == "estudiantes")
+        window.location.href = "/listar-usuarios-estudiantes";
+        if (control == "usuarios")
+        window.location.href = "/listar-usuarios";
+        alert(" el  " +  user.tipo_usuario+ " "  + user.nombre_completo + " ahora no está autorizado")
     }
 
     return <tr>

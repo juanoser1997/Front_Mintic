@@ -1,24 +1,26 @@
 import React from 'react';
+import ListaUsuarios from '../ListarUsuarios/ListarUsuarios';
+import ListarUsuariosEstudiantes from '../ListarUsuariosEstudiantes/ListarUsuariosEstudiantes';
 import ProyectosAdmin from '../ProtectosAdmin/ProyectosAdmin';
 import ProyectosEstudiante from '../ProyectosEstudiante/ProyectosEstudiante';
 import ForbidenComponent from '../shared/components/fordiben/ForbidenComponent';
 
   
 
-function ProyectosHome() {
+function UsuariosHome() {
   const user = {
-    // rol:'estudiante',
+    rol:'lider',
     //  rol:'pendiente',
-    rol:'administrador',
+    // rol:'administrador',
     _id:'6195bf66eb635c2c3e729713'
   }
-   if (user.rol === 'estudiante')
-    return <ProyectosEstudiante></ProyectosEstudiante>;
+   if (user.rol === 'lider')
+    return <ListarUsuariosEstudiantes/>;
    if (user.rol === 'administrador')
-    return <ProyectosAdmin></ProyectosAdmin>;
+    return <ListaUsuarios/>;
    if (user.rol === 'pendiente')
     return <ForbidenComponent></ForbidenComponent>;
       
     }
     
-    export default ProyectosHome;
+    export default UsuariosHome;

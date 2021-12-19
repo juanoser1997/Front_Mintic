@@ -18,7 +18,7 @@ const ListarUsuariosEstudiantes = () => {
     }
 `;
     const { data, loading, error } = useQuery(USUARIOSESTUDIANTES);
-
+let control = "estudiantes"
     if (loading) {
         return <div>
             <p>Estoy cargando aún</p>
@@ -52,7 +52,7 @@ const ListarUsuariosEstudiantes = () => {
             </tr>
           </thead>
           <tbody> 
-          {data.usuariosEstudiantes.map((usuario) => <Usuario user={usuario} />)}
+          {data.usuariosEstudiantes.map((usuario) => <Usuario user={usuario} control = {control} />)}
         </tbody>
         </table>
         </div>

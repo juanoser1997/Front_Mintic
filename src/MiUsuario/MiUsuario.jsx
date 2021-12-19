@@ -74,7 +74,12 @@ function MiUsuario() {
           _id:data.usuario._id
          
         }
-      })
+        
+      });
+      alert("Usuario editado")
+      window.location.href = "/mi-usuario";
+    
+
     }}> 
       <div>
         <Form.Group className="mb-3" controlId="formGroupEmail">

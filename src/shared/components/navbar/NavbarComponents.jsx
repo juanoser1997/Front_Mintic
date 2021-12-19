@@ -8,9 +8,18 @@ function NavbarComponents() {
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
   const { user, isAuthenticated } = useAuth0();
+  const userlogged = {
+    // rol:'lider',
+    rol:'estudiante',
+    //  rol:'pendiente',
+    //  rol:'administrador',
 
+    _id:'6195bf66eb635c2c3e729713'
+  }
 
   return (
+
+
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark nav">
       <div class="container-fluid contain">
@@ -22,14 +31,26 @@ function NavbarComponents() {
         </button>
         <div class="collapse navbar-collapse" id="navbarNav" >
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <Link to="/proyectos-home" class="nav-link nav" aria-current="page" href="#">Proyectos</Link>
-            </li>
-            <li class="nav-item">
+            
+          { userlogged.rol == 'estudiante' ||  userlogged.rol =="administrador"
+        ? (<div><li class="nav-item">
+        <Link to="/proyectos-home" class="nav-link nav" aria-current="page" href="#">Proyectos</Link>
+      </li>
+    </div>)
+        : <div></div> }
+          { userlogged.rol == 'estudiante' ||  userlogged.rol =="lider"
+        ? (<div>
+           <li class="nav-item"> 
               <Link to="/misproyectos-home" class="nav-link nav" href="#">Mis proyectos</Link>
-            </li>
+            </li> </div>)
+        : <div></div> }
+              
+             
             <li class="nav-item">
               <Link to="/mi-usuario" class="nav-link nav" href="#">Mi Usuario</Link>
+            </li>
+            <li class="nav-item">
+              <Link to="/usuarios-home" class="nav-link nav" href="#">Usuario</Link>
             </li>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

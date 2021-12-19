@@ -8,8 +8,8 @@ import ForbidenComponent from '../shared/components/fordiben/ForbidenComponent';
 
 function MisProyectosHome() {
   const user = {
-    rol:'estudiante',
-    // rol:'lider',
+    // rol:'estudiante',
+    rol:'lider',
     // rol:'pendiente',
     _id:'6195bf66eb635c2c3e729713',
     varible: false
