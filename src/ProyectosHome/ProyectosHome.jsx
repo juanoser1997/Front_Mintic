@@ -16,7 +16,7 @@ function ProyectosHome() {
     return <ProyectosEstudiante></ProyectosEstudiante>;
     if (user.rol === 'Líder'  && user.estado!= 'Pendiente')
     return <ProyectosAdmin></ProyectosAdmin>;
-   if (user.rol === 'Administrador'  && user.estado!= 'Pendiente')
+   if (user.rol === 'Administrador'  && user.estado != 'Pendiente')
     return <ProyectosAdmin></ProyectosAdmin>;
     
    

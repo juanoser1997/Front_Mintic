@@ -9,16 +9,14 @@ import ForbidenComponent from '../shared/components/fordiben/ForbidenComponent';
 
 function UsuariosHome() {
   const user = {
-    rol:'lider',
-    //  rol:'pendiente',
-    // rol:'administrador',
-    _id:'6195bf66eb635c2c3e729713'
+    rol: localStorage.getItem("tipo_usuario"),
+    estado: localStorage.getItem("estado"),
   }
    if (user.rol === 'lider')
     return <ListarUsuariosEstudiantes/>;
    if (user.rol === 'administrador')
     return <ListaUsuarios/>;
-   if (user.rol === 'pendiente')
+   if (user.rol === 'Estudiante')
     return <ForbidenComponent></ForbidenComponent>;
       
     }

@@ -41,7 +41,7 @@ function ProyectosEstudiante() {
   `;
 
 
-  let  id_estudiante ="80378556";
+  let  id_estudiante =String(localStorage.getItem("identificacion"));
 
   const MUTATION_PROYECTO = gql`
   mutation  updateInscripcionProyecto( $nombre: String , $id_estudiante:String, $id_inscripcion:String ){

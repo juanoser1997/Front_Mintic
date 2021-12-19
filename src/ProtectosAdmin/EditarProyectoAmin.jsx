@@ -16,14 +16,7 @@ function EditarProyectoAdmin() {
     estado: estado,
   };
   let correo = 'edwin@gmail.com'
-  const USUARIO = gql`
-    query  usuarioCorreo($correo: String!) {
-       usuarioCorreo(correo: $correo) {
-        nombre_completo
-       
-      }
-    }
-  `;
+
 
   const PROYECTOS = gql`
     query getPojectId($idProyecto: String!) {
@@ -50,22 +43,20 @@ mutation deleteUser($ident:Int){
 }
 `;
 
-  // const { loading, error, data } = useQuery(PROYECTOS, {
-  //   variables: { idProyecto },
-  // });
-  const { loading, error, data } = useQuery(USUARIO, {
-    variables: { correo},
+  const { loading, error, data } = useQuery(PROYECTOS, {
+    variables: { idProyecto },
   });
+
 
   
 const [activar] = useMutation(ACTIVAR_PROYECTO);
 const [cambiar_fase] = useMutation(CAMBIAR_FASE);
 const [inactivar] = useMutation(INACTIVAR_PROYECTO);
   if (loading) return <h1>Cargando....</h1>;
-  // if (error) return <h1>Error</h1>;
+  if (error) return <h1>Error</h1>;
   
   console.log(data.usuarioCorreo)
-  // console.log(data.getProjectId.nombre);
+  console.log(data.getProjectId.nombre);
   function handleGuardar(fase,estado){
     console.log(fase)
     console.log(estado)
@@ -73,7 +64,7 @@ const [inactivar] = useMutation(INACTIVAR_PROYECTO);
   }
   return (
     <Fragment>
-      {/* <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Editar Proyectos Admin </h2>
+      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Editar Proyectos Admin </h2>
       <div className="row"  style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
       <hr className="lin"></hr>
       <table className="table row1">
@@ -115,7 +106,7 @@ const [inactivar] = useMutation(INACTIVAR_PROYECTO);
       </table>
       </div>
 
-      <Button variant="dark" onClickCapture={handleGuardar(project.fase, project.estado)} style={{ marginLeft:'43%' }} >Guardar Cambios </Button> */}
+      <Button variant="dark" onClickCapture={handleGuardar(project.fase, project.estado)} style={{ marginLeft:'43%' }} >Guardar Cambios </Button>
     </Fragment>
   );
 }
