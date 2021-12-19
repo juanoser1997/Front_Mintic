@@ -9,7 +9,7 @@ import ProyectosEstudiante from "./ProyectosEstudiante/ProyectosEstudiante.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 import ForbidenComponent from "./shared/components/fordiben/ForbidenComponent.jsx";
 
-import HomePage from "./home/HomePage.jsx";
+
 import ElementContextProvider from "./context/elementContext.js";
 
 
@@ -30,6 +30,9 @@ import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
 import MiUsuario from "./MiUsuario/MiUsuario";
 import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
 import UsuariosHome from "./UsuariosHome/UsuariosHome";
+import Login from "./Login/LoginPage";
+import HomePage from "./home/HomePage";
+import CrearUsuario from "./CrearUsuario/CrearUsuario";
 
 
 function App() {
@@ -46,6 +49,12 @@ function App() {
 
 
         <Route path="/" exact>
+          <Login />
+        </Route>
+        <Route path="/usuario/registro" exact>
+          <CrearUsuario />
+        </Route>
+        <Route path="/home" exact>
           <HomePage />
         </Route>
         
@@ -67,9 +76,13 @@ function App() {
         <Route path="/lista-avances">
           <ListaAvances />
         </Route>
+       +
+        <Route path="/mi-usuario" exact>
+          <MiUsuario />
+
+        </Route>
         <Route path="/proyectos-home" exact>
           <ProyectosHome />
-
         </Route>
 
         <Route path="/mi-usuario" exact>

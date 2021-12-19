@@ -7,11 +7,28 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  ApolloLink,
+  HttpLink,
 } from "@apollo/client";
+
+
+const httpLink = new HttpLink({uri:'http://localhost:9092/graphql'})
+const authLink = new ApolloLink((operation, forward) =>{
+  const token = localStorage.getItem('auth_token');
+  operation.setContext({
+    headers:{
+      authorization: token ? `${token}`: ''
+    }
+  });
+  return forward(operation);
+})
 const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   uri: 'http://localhost:9092/graphql',
   cache: new InMemoryCache()
 });
+
+
 
 
 ReactDOM.render(

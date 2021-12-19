@@ -19,6 +19,7 @@ function ProyectosEstudiante() {
         fase
         _id
         fecha_inicio
+
         inscripciones {
           estado
           id_inscripcion
@@ -27,6 +28,7 @@ function ProyectosEstudiante() {
           fecha_egreso
           
       }
+
       avances {
         id_avance
         fecha_avance
@@ -34,7 +36,6 @@ function ProyectosEstudiante() {
         observaciones_lider
       }
           
-      
       }
     }
   `;

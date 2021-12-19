@@ -31,11 +31,17 @@ const Usuario = ({ user , control}) => {
 
     const activarUser = () => {
         activar({ variables: { identificacion: user.identificacion } })
-        if (control == "estudiantes")
+
+        if (control == "estudiantes"){
         window.location.href = "/listar-usuarios-estudiantes";
-        if (control == "usuarios")
+      localStorage.setItem("estado", 'Autorizado')
+        }
+        if (control == "usuarios"){
         window.location.href = "/listar-usuarios";
+      localStorage.setItem("estado", 'Autorizado')
+        }
         alert("Usted Ha autorizado al " +  user.tipo_usuario+ " "  + user.nombre_completo)
+
     }
 
     const eliminarUser = () => {

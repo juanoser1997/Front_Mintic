@@ -7,17 +7,19 @@ import ForbidenComponent from '../shared/components/fordiben/ForbidenComponent';
 
 function ProyectosHome() {
   const user = {
-    // rol:'estudiante',
-    //  rol:'pendiente',
-    rol:'administrador',
-    _id:'6195bf66eb635c2c3e729713'
+    rol: localStorage.getItem("tipo_usuario"),
+    estado: localStorage.getItem("estado"),
   }
-   if (user.rol === 'estudiante')
-    return <ProyectosEstudiante></ProyectosEstudiante>;
-   if (user.rol === 'administrador')
-    return <ProyectosAdmin></ProyectosAdmin>;
-   if (user.rol === 'pendiente')
+  if (user.estado === 'Pendiente')
     return <ForbidenComponent></ForbidenComponent>;
+   if (user.rol === 'Estudiante' && user.estado!= 'Pendiente')
+    return <ProyectosEstudiante></ProyectosEstudiante>;
+    if (user.rol === 'Líder'  && user.estado!= 'Pendiente')
+    return <ProyectosAdmin></ProyectosAdmin>;
+   if (user.rol === 'Administrador'  && user.estado!= 'Pendiente')
+    return <ProyectosAdmin></ProyectosAdmin>;
+    
+   
       
     }
     

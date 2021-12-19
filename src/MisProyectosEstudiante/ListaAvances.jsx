@@ -112,7 +112,6 @@ function ListaAvances() {
                 </thead>
                 <tbody> {datosTabla}</tbody>
               </table>
-
               <Link to={"/misproyectos-home"}>
                 {" "}
                 <Button style={{ marginLeft: "43%" }} variant="dark">
