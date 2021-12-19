@@ -1,56 +1,64 @@
-import React, { Fragment } from "react";
-import './LoginStyles.css'
-import NavbarComponents from "../shared/components/navbar/NavbarComponents";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useMutation } from "@apollo/client"
+import gql from "graphql-tag"
+import { useState } from "react";
+import { useHistory } from "react-router";
+import Button from "react-bootstrap/Button";
 
+const Login = () => {
+    const [usuarioLog, setUsuarioLog] = useState("");
+    const his = useHistory();
+    let user;
+    const [pass, setPass] = useState("")
+    const AUTENTICAR_USUARIO = gql`
+        mutation autenticar($usuario:String,$clave:String){
+            autenticar(usuario:$usuario,clave:$clave){
+                status
+                jwt
+            }
+        }
+    `
+    const changeClave = (e) => {
+        e.preventDefault();
+        setPass(e.target.value)
+    }
+    const [auth] = useMutation(AUTENTICAR_USUARIO)
+    const autenticar = async (e) => {
+        setUsuarioLog(String(user.value));
+        localStorage.setItem("usuarioLog", String(user.value));
+        localStorage.getItem("usuarioLog");
+        e.preventDefault();
+        
+        const { data: { autenticar } } = await auth({
+            variables: {
+                usuario: user.value,
+                clave: pass
+            }
+        })
+        if (autenticar.status != 200) {
+            alert("Usuario y/o contrasena invalida")
+        } else {
+            localStorage.setItem('auth_token', autenticar.jwt)
+            window.location.href = "/home";
+            his.push("/home")
+        }
+    }
+    const registroUsuarioNuevo = () => {
+        his.push("/usuario/registro")
+    }
+    return <div className="container">
+        <form>
+                <h3>Autenticar</h3>
+                <label htmlFor="username">Username</label>
+                <input type="text" placeholder="Email" id="username" ref={u => user = u} />
+                <label htmlFor="password" style={{ marginLeft: '2%' }}>Password</label>
+                <input type="password" placeholder="Password" id="password"
+                    value={pass}
+                    onChange={changeClave} />
+                <Button variant="dark" type="submit" style={{ marginLeft: '2%' }} onClick={autenticar}>Log In</Button>
+                <Button variant="dark" type="submit" style={{ marginLeft: '2%' }} onClick={registroUsuarioNuevo}>Registro Usuario Nuevo</Button>
 
-
-function LoginPage() {
-
-  
-    
-
-    return (
-        <Fragment>
-            <div className="container ">
-                <h5 class="form-login container-mio ">Iniciar sesión</h5>
-                <div className="row">
-                    <input className="controls subir" type="text" name="io" value="" placeholder="Nombre de usuario" />
-                </div>
-                <div className="row">
-                    <input className="controls subir1" type="password" name="contrasena" value="" placeholder="Contraseña" />
-                </div>
-
-            </div>
-            <div className="form-login">
-                <div class="sign-in-btn">
-                    <p class="btn-text-sigin"><b>Iniciar Sesion</b></p>
-                </div>
-
-                <div class="google-btn">
-                    <div class="google-icon-wrapper">
-                        <img class="google-icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
-                    </div>
-                    <p class="btn-text"><b>Sign in with google</b></p>
-                </div>
-
-                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                <label className="form-check-label" for="flexCheckDefault">
-                    Recordarme
-                </label>
-
-                <p><a href="#">Olvidaste tu contraseña?</a></p>
-
-
-
-
-
-            </div>
-
-
-        </Fragment>
-    )
+        </form>
+    </div>
 }
 
-export default LoginPage;
+export default Login

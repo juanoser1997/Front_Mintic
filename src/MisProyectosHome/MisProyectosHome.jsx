@@ -8,18 +8,21 @@ import ForbidenComponent from '../shared/components/fordiben/ForbidenComponent';
 
 function MisProyectosHome() {
   const user = {
-    // rol:'estudiante',
-    rol:'lider',
-    // rol:'pendiente',
-    _id:'6195bf66eb635c2c3e729713' 
+    rol: localStorage.getItem("tipo_usuario"),
+    estado: localStorage.getItem("estado"),
+
+    //  rol:'pendiente',
+    
+    
   }
-   if (user.rol === 'estudiante')
+   if (user.rol === 'Estudiante'  && user.estado!= 'Pendiente')
     return <MisProyectosEstudiante></MisProyectosEstudiante>;
-   if (user.rol === 'lider')
+   if (user.rol === 'Líder' && user.estado!= 'Pendiente')
     return <MisProyectosLider></MisProyectosLider>;
-    if (user.rol === 'pendiente')
+    if (user.estado === 'Pendiente')
     return <ForbidenComponent></ForbidenComponent>;
-      
+    
+
     }
     
     export default MisProyectosHome;

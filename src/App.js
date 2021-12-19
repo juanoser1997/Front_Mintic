@@ -9,7 +9,7 @@ import ProyectosEstudiante from "./ProyectosEstudiante/ProyectosEstudiante.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 import ForbidenComponent from "./shared/components/fordiben/ForbidenComponent.jsx";
 
-import HomePage from "./home/HomePage.jsx";
+
 import ElementContextProvider from "./context/elementContext.js";
 
 
@@ -26,8 +26,12 @@ import RegistrarObservacion from "./MisProyectosLider/RegistrarObservacion.jsx";
 import ListarUsuarios from "./ListarUsuarios/ListarUsuarios";
 import ListarUsuariosEstudiantes from "./ListarUsuariosEstudiantes/ListarUsuariosEstudiantes";
 import Inscripciones from "./MisProyectosLider/Inscripciones";
-
-
+import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
+import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
+import MiUsuario from "./MiUsuario/MiUsuario";
+import Login from "./Login/LoginPage";
+import HomePage from "./home/HomePage";
+import CrearUsuario from "./CrearUsuario/CrearUsuario";
 function App() {
   
 
@@ -42,6 +46,12 @@ function App() {
 
 
         <Route path="/" exact>
+          <Login />
+        </Route>
+        <Route path="/usuario/registro" exact>
+          <CrearUsuario />
+        </Route>
+        <Route path="/home" exact>
           <HomePage />
         </Route>
         
@@ -63,9 +73,13 @@ function App() {
         <Route path="/lista-avances">
           <ListaAvances />
         </Route>
+       +
+        <Route path="/mi-usuario" exact>
+          <MiUsuario />
+
+        </Route>
         <Route path="/proyectos-home" exact>
           <ProyectosHome />
-
         </Route>
         <Route path="/misproyectos-home" exact>
           <MisProyectosHome />
@@ -93,6 +107,13 @@ function App() {
      
         <Route path="/inscripciones" exact>
           <Inscripciones/>
+        </Route>
+     
+        <Route path="/lista-avances-lider" exact>
+          <ListaAvancesLider/>
+        </Route>
+        <Route path="/crear-avance" exact>
+          <CrearAvance></CrearAvance>
         </Route>
      
       
