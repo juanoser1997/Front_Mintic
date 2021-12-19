@@ -27,11 +27,14 @@ import ListarUsuarios from "./ListarUsuarios/ListarUsuarios";
 import ListarUsuariosEstudiantes from "./ListarUsuariosEstudiantes/ListarUsuariosEstudiantes";
 import Inscripciones from "./MisProyectosLider/Inscripciones";
 import ListaAvancesLider from "./MisProyectosLider/ListaAvancesLider";
-import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
 import MiUsuario from "./MiUsuario/MiUsuario";
+import CrearAvance from "./MisProyectosEstudiante/CrearAvance";
+import UsuariosHome from "./UsuariosHome/UsuariosHome";
 import Login from "./Login/LoginPage";
 import HomePage from "./home/HomePage";
 import CrearUsuario from "./CrearUsuario/CrearUsuario";
+
+
 function App() {
   
 
@@ -81,6 +84,12 @@ function App() {
         <Route path="/proyectos-home" exact>
           <ProyectosHome />
         </Route>
+
+        <Route path="/mi-usuario" exact>
+          <MiUsuario />
+
+        </Route>
+
         <Route path="/misproyectos-home" exact>
           <MisProyectosHome />
         </Route>
@@ -102,6 +111,9 @@ function App() {
         </Route>
         <Route path="/listar-usuarios-estudiantes" exact>
           <ListarUsuariosEstudiantes />
+        </Route>
+        <Route path="/usuarios-home" exact>
+          <UsuariosHome />
         </Route>
 
      

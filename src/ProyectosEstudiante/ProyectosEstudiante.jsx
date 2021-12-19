@@ -10,13 +10,16 @@ function ProyectosEstudiante() {
   const PROYECTOS = gql`
     query {
       proyectos {
-        lider
         nombre
-        presupuesto
         objetivos_generales
+        estado_proyecto
         objetivos_especificos
-        fecha_inicio
+        presupuesto
+        lider
         fase
+        _id
+        fecha_inicio
+
         inscripciones {
           estado
           id_inscripcion
@@ -25,6 +28,14 @@ function ProyectosEstudiante() {
           fecha_egreso
           
       }
+
+      avances {
+        id_avance
+        fecha_avance
+        descripcion
+        observaciones_lider
+      }
+          
       }
     }
   `;
@@ -47,6 +58,7 @@ const [creadorDeProyecto] = useMutation(MUTATION_PROYECTO);
 
   const datosTabla = data.proyectos.map(
     ({
+      _id,
       lider,
       nombre,
       presupuesto,
@@ -54,6 +66,8 @@ const [creadorDeProyecto] = useMutation(MUTATION_PROYECTO);
       objetivos_especificos,
       fecha_inicio,
       fase,
+      estado_proyecto,
+      avances,
       inscripciones,
     }) => (
       <Fragment>
@@ -69,6 +83,10 @@ const [creadorDeProyecto] = useMutation(MUTATION_PROYECTO);
                 <ListGroup.Item as="li">
                   Objetivos Generales : {objetivos_generales}
                 </ListGroup.Item>
+                <ListGroup.Item as="li">
+                  Estado del Proyecto : {estado_proyecto}
+                </ListGroup.Item>
+            
                 <ListGroup.Item as="li">
                   Objetivos especificos :{" "}
                   {objetivos_especificos.map((objetivo_especifico) => {

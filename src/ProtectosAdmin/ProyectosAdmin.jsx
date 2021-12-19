@@ -5,7 +5,7 @@ import { ElementContext } from "../context/elementContext";
 import Accordion from "react-bootstrap/Accordion";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button"; 
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql , useMutation} from "@apollo/client";
 
 
 
@@ -33,6 +33,8 @@ function ProyectosAdmin () {
   }
 `;
 
+
+
 useEffect(() => {
   setIdProyecto("");
   localStorage.setItem("idProyecto", idProyecto);
@@ -41,6 +43,7 @@ useEffect(() => {
 
 const { loading, error, data } = useQuery(PROYECTOS);
 if (loading) return <h1>Cargando....</h1>;
+
 
 const datosTabla = data.proyectos.map(
   ({

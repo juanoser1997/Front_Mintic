@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 
 
+
 function MiUsuario() {
     let _id = localStorage.getItem("_id_usuario")
+
     const USUARIOS = gql`
       query  usuario($_id: String) { 
       usuario(_id: $_id) { 
@@ -24,12 +26,13 @@ function MiUsuario() {
     `;
   
     const MUTATION_USUARIO = gql`
-        mutation  updateUser($nombre_completo:String,$identificacion:Int,$clave:String,$correo:String,$_id:String){
+    mutation  updateUser($nombre_completo:String,$identificacion:Int,$clave:String,$correo:String,$_id:String){
         updateUser(user:{nombre_completo:$nombre_completo,identificacion:$identificacion,clave:$clave,correo:$correo,_id:$_id})
-
     }
-    `;
+  `;
   
+
+
 
   const [creadorDeProyecto] = useMutation(MUTATION_USUARIO)
 
@@ -71,7 +74,9 @@ function MiUsuario() {
           _id:data.usuario._id
          
         }
-      })
+      });
+      alert("Usuario editado")
+      window.location.href = "/mi-usuario";
     }}> 
       <div>
         <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -108,6 +113,8 @@ function MiUsuario() {
   );
 }
 
+
 export default MiUsuario;
+
 
 

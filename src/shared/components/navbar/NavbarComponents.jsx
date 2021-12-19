@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 
 
 function NavbarComponents() {
+
   const his = useHistory();
   let token = localStorage.getItem('auth_token')
   const { user, isAuthenticated } = useHistory();
@@ -21,6 +22,7 @@ function NavbarComponents() {
     }
 
     return (
+
 
 
 
@@ -62,6 +64,7 @@ function NavbarComponents() {
                 <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                   <li><Link to="/listar-usuarios" className="dropdown-item" href="#">Usuarios Registrados</Link></li>
                   <li><Link to="/listar-usuarios-estudiantes" className="dropdown-item" href="#">Estudiantes Registrados</Link></li>
+
 
 
                 </ul>
@@ -109,73 +112,3 @@ function NavbarComponents() {
   }
 }
 export default NavbarComponents;
-
-/* 
-
-import React from "react";
-import { Link } from 'react-router-dom'
-import './NavbarStyles.css'
-import { useHistory } from "react-router";
-
-
-const NavbarComponents = () => {
-  const his = useHistory();
-  let token = localStorage.getItem('auth_token')
-  const { user, isAuthenticated } = useHistory();
-  const cerrar = () => {
-    localStorage.clear()
-    his.push("/")
-  }
-  if (token) {
-
-    return (
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark nav">
-        <div class="container-fluid contain">
-          <div class="collapse navbar-collapse" id="navbarNav" >
-            <ul class="navbar-nav">
-            <li class="nav-item">
-                <Link to="/home" class="nav-link nav" aria-current="page" href="#">Home</Link>
-              </li>
-              <li class="nav-item">
-                <Link to="/proyectos-home" class="nav-link nav" aria-current="page" href="#">Proyectos</Link>
-              </li>
-              <li class="nav-item">
-                <Link to="/misproyectos-home" class="nav-link nav" href="#">Mis proyectos</Link>
-              </li>
-              <li class="nav-item">
-                <Link to="/mi-usuario" class="nav-link nav" href="#">Mi usuario</Link>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Usuarios
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><Link to="/listar-usuarios" className="dropdown-item" href="#">Usuarios Registrados</Link></li>
-                  <li><Link to="/listar-usuarios-estudiantes" className="dropdown-item" href="#">Estudiantes Registrados</Link></li>
-
-                </ul>
-              </li>
-              <li className="nav-item" >
-                <button onClick={cerrar}>Cerrar sesión</button>
-              </li>
-            </ul>
-          </div>
-          <form class="d-flex">
-                    <button className="btn btn-outline-success" type="submit">{isAuthenticated ? user.nombre_completo  : "User"}</button>
-          </form>
-        </div>
-      </nav>
-
-
-
-
-    )
-  }
-  else {
-
-    his.push("/")
-    return <div></div>
-  }
-}
-export default NavbarComponents; */

@@ -10,10 +10,6 @@ function MisProyectosHome() {
   const user = {
     rol: localStorage.getItem("tipo_usuario"),
     estado: localStorage.getItem("estado"),
-
-    //  rol:'pendiente',
-    
-    
   }
    if (user.rol === 'Estudiante'  && user.estado!= 'Pendiente')
     return <MisProyectosEstudiante></MisProyectosEstudiante>;
@@ -21,8 +17,6 @@ function MisProyectosHome() {
     return <MisProyectosLider></MisProyectosLider>;
     if (user.estado === 'Pendiente')
     return <ForbidenComponent></ForbidenComponent>;
-    
-
     }
     
     export default MisProyectosHome;

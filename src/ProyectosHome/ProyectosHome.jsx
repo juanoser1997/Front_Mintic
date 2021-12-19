@@ -9,10 +9,6 @@ function ProyectosHome() {
   const user = {
     rol: localStorage.getItem("tipo_usuario"),
     estado: localStorage.getItem("estado"),
-
-    //  rol:'pendiente',
-    
-    
   }
   if (user.estado === 'Pendiente')
     return <ForbidenComponent></ForbidenComponent>;
