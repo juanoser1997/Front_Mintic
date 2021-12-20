@@ -77,9 +77,6 @@ let obj =project.objetivos_especificos.slice()
 
 console.log(lista1)
   obj.splice(index,1)
-  // project.objetivos_especificos.splice(index,1)
- 
-
    Setlista1(obj)
    Setlista(lista1)
    console.log(index)

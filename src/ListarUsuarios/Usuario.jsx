@@ -68,7 +68,8 @@ const Usuario = ({ user , control}) => {
         <td><Button variant="dark" style={{ marginLeft:'2%', borderRadius:'10px' }} onClick={activarUser}>Autorizar</Button>
         
             {/* <button className="btn btn-primary" onClick={eliminarUser}>No autorizar</button></td> */}
-            <Button variant="dark" style={{ marginLeft:'2%', borderRadius:'10px' }} onClick={inactivarUser}>No Autorizar</Button></td>
+            {localStorage.getItem("tipo_usuario") != 'Líder' ? <Button variant="dark" style={{ marginLeft:'2%', borderRadius:'10px' }} onClick={inactivarUser}>No Autorizar</Button>: <div></div> }
+            </td>
     </tr>
 }
 
