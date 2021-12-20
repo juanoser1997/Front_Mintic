@@ -48,7 +48,8 @@ function Inscripciones() {
   if (error) return <h1>Error</h1>;
 
   const datosTabla = data.getProjectId.inscripciones.map(
-    ({ estado, id_inscripcion, id_estudiante }, index) => (
+    ({ estado, id_inscripcion, id_estudiante }, index) => 
+   { if(estado == 'Pendiente') {return (
       <Fragment>
         <tr>
           {" "}
@@ -65,7 +66,7 @@ function Inscripciones() {
           </td>
         </tr>
       </Fragment>
-    )
+    )}}
   );
   var inscripciones1 =inscripciones;
 
@@ -142,7 +143,7 @@ function Inscripciones() {
   return (
     <Fragment>
       <h2 className="te" style={{ textAlign: "center", marginTop: "3%" }}>
-        Editar Proyecto{" "}
+        Insripciones Pendientes{" "}
       </h2>
 
       <div
