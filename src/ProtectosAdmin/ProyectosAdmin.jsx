@@ -20,7 +20,7 @@ function ProyectosAdmin () {
   };
   const PROYECTOS = gql`
   query {
-    proyectos {
+    ProyectosAprobados {
       _id
       lider
       nombre
@@ -28,7 +28,9 @@ function ProyectosAdmin () {
       objetivos_generales
       objetivos_especificos
       fecha_inicio
+      fecha_terminacion
       fase
+      estado_proyecto
     }
   }
 `;
@@ -45,7 +47,7 @@ const { loading, error, data } = useQuery(PROYECTOS);
 if (loading) return <h1>Cargando....</h1>;
 
 
-const datosTabla = data.proyectos.map(
+const datosTabla = data.ProyectosAprobados.map(
   ({
     _id,
     lider,
@@ -55,6 +57,8 @@ const datosTabla = data.proyectos.map(
     objetivos_especificos,
     fecha_inicio,
     fase,
+    estado_proyecto,
+    fecha_terminacion
   }) => (
     <Fragment>
       <Accordion>
@@ -65,6 +69,9 @@ const datosTabla = data.proyectos.map(
               <ListGroup.Item as="li"> Lider : {lider} </ListGroup.Item>
               <ListGroup.Item as="li">
                 Presupuesto : {presupuesto}
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                Estado : {estado_proyecto}
               </ListGroup.Item>
               <ListGroup.Item as="li">
                 Objetivos Generales : {objetivos_generales}
@@ -82,11 +89,15 @@ const datosTabla = data.proyectos.map(
               </ListGroup.Item>
               <ListGroup.Item as="li">
                 Fecha de inicio :{" "}
-                {new Date(fecha_inicio).toLocaleDateString()}
+                {fecha_inicio != undefined ? new Date(fecha_inicio).toLocaleDateString() : ""}
+              </ListGroup.Item>
+              <ListGroup.Item as="li">
+                Fecha de terminacion :{" "}
+                {fecha_terminacion != undefined ? new Date(fecha_terminacion).toLocaleDateString() : ""}
               </ListGroup.Item>
               <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
           {/* <Link onClickCapture={(e, id) => { handleEditar(_id); }} to="/editar-proyecto-admin">  <Button style={{ width:'100%' }} variant="dark" >Editar</Button></Link>  */}
-           <Button style={{ width:'100%' }} variant="dark"   onClickCapture={(e, id) => { handleEditar(_id); }}>Editar</Button>
+          { fase != 'Terminado'? <Button style={{ width:'100%' }} variant="dark"   onClickCapture={(e, id) => { handleEditar(_id); }}>Editar</Button>: <div></div> }
             </ListGroup>
           </Accordion.Body>
         </Accordion.Item>

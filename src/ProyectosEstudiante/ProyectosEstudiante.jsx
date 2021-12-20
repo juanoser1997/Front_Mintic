@@ -24,6 +24,7 @@ function ProyectosEstudiante() {
           estado
           id_inscripcion
           id_estudiante
+          _id_estudiante
           fecha_ingreso
           fecha_egreso
           
@@ -44,8 +45,8 @@ function ProyectosEstudiante() {
   let  id_estudiante =String(localStorage.getItem("identificacion"));
 
   const MUTATION_PROYECTO = gql`
-  mutation  updateInscripcionProyecto( $nombre: String , $id_estudiante:String, $id_inscripcion:String ){
-    updateInscripcionProyecto( nombre: $nombre , id_estudiante: $id_estudiante, id_inscripcion: $id_inscripcion)
+  mutation  updateInscripcionProyecto( $nombre: String , $id_estudiante:String, $id_inscripcion:String, $_id_estudiante: String ){
+    updateInscripcionProyecto( nombre: $nombre , id_estudiante: $id_estudiante, id_inscripcion: $id_inscripcion, _id_estudiante: $_id_estudiante)
 }
   
 `;
@@ -106,12 +107,18 @@ const [creadorDeProyecto] = useMutation(MUTATION_PROYECTO);
                 <Form
             onSubmit={(e) => {
               e.preventDefault();
-              creadorDeProyecto({
+              let id_ins;
+              if(inscripciones.length==1)
+             {  id_ins =  "1" }
+           
 
+              creadorDeProyecto({
+                      
                 variables: {
                   nombre: nombre,
                   id_estudiante: id_estudiante,
-                  id_inscripcion:String( inscripciones.length + 1),
+                  id_inscripcion: String( inscripciones.length + 1),
+                  _id_estudiante: localStorage.getItem("_id_usuario"),
 
                 },
               });
@@ -120,7 +127,7 @@ const [creadorDeProyecto] = useMutation(MUTATION_PROYECTO);
                window.location.href = "/proyectos-estudiante";
             }}
           >
-                <Button style={{ width: '100%' }} type="submit" variant="dark">Inscribirse</Button>
+              {(estado_proyecto != 'Activo' && inscripciones.find(ins => (ins._id_estudiante == localStorage.getItem("_id_usuario") ) )) || inscripciones.find(ins => (ins._id_estudiante == localStorage.getItem("_id_usuario") && ins.fecha_egreso == undefined) ) ?   <div></div> :<Button style={{ width: '100%' }} type="submit" variant="dark">Inscribirse</Button>}
                 </Form>
               </ListGroup>
             </Accordion.Body>

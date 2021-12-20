@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import './NavbarStyles.css'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router";
+import { Button } from "react-bootstrap";
+import Image from 'react-bootstrap/Image'
+
 
 
 function NavbarComponents() {
@@ -19,6 +22,7 @@ function NavbarComponents() {
     const userlogged = {
       rol: localStorage.getItem("tipo_usuario"),
       estado: localStorage.getItem("estado"),
+      nombre_completo: localStorage.getItem("nombre_completo"),
     }
 
     return (
@@ -28,7 +32,7 @@ function NavbarComponents() {
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark nav">
         <div class="container-fluid contain">
-          <Link to="/" class="navbar-brand nav" href="#">Udea Proyectos</Link>
+          <Link to="/home" class="navbar-brand nav" href="#">Udea Proyectos</Link>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,46 +53,26 @@ function NavbarComponents() {
                     <Link to="/misproyectos-home" class="nav-link nav" href="#">Mis proyectos</Link>
                   </li> </div>)
                 : <div></div>}
-
-
-              <li class="nav-item">
-                <Link to="/mi-usuario" class="nav-link nav" href="#">Mi Usuario</Link>
+              {userlogged.rol == 'Administrador' || userlogged.rol == "Líder"
+                ? (<div>
+                     <li class="nav-item">
+                <Link to="/usuarios-home" class="nav-link nav" href="#">Usuarios</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/usuarios-home" class="nav-link nav" href="#">Usuario</Link>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Usuarios
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><Link to="/listar-usuarios" className="dropdown-item" href="#">Usuarios Registrados</Link></li>
-                  <li><Link to="/listar-usuarios-estudiantes" className="dropdown-item" href="#">Estudiantes Registrados</Link></li>
-
-
-
-                </ul>
-              </li>
-              <li className="nav-item" >
-                <button onClick={cerrar}>Cerrar sesión</button>
-              </li>
+             </div>)
+                : <div></div>}
             </ul>
           </div>
-          <form class="d-flex">
-            
-          </form>
-          <div class="dropdown">
-            <a class=" dropdown-toggle navv0" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-              {isAuthenticated ? user.name : "Usuario"}
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-           
-
-              
-
-          
-
-            </ul>
+          <span>
+          <Link  to={"/mi-usuario"}  aria-expanded="false"><Button variant="success" style={{ marginRight: "10px"}}   >
+       { "Usuario : " + userlogged.nombre_completo + " / "+ userlogged.rol}</Button>
+            </Link>
+              </span>
+       
+          <div >
+          <li className="nav-item" >
+                <Button onClick={cerrar}>Cerrar sesión</Button>
+              </li>
+         
           </div>
         </div>
       </nav>
@@ -104,9 +88,10 @@ function NavbarComponents() {
     return ( <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark nav">
         <div class="container-fluid contain">
-          <Link to="/" class="navbar-brand nav" href="#">Udea Proyectos</Link>
+          <Link to="/" class="navbar-brand nav" href="#"> Udea Proyectos</Link>
           </div>
       </nav>
+   
     </div>
   )
   }

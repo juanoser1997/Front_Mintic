@@ -21,6 +21,8 @@ function Inscripciones() {
           estado
           id_inscripcion
           id_estudiante
+          _id_estudiante
+          fecha_ingreso
         }
       }
     }
@@ -69,16 +71,18 @@ function Inscripciones() {
 
   if (cuenta == 0) {
     let lista1 =  data.getProjectId.inscripciones.slice()
-    lista1.map((ins, index)=> {
-     ins = {
-        // __typename: "inscripciones",
-        estado: "lista1[index].estado",
-        id_inscripcion:lista1[index].id_inscripcion,
-        id_estudiante:  lista1[index].id_estudiante,
-      }
+    // lista1.map((ins, index)=> {
+    //  ins = {
+    //     // __typename: "inscripciones",
+    //     estado: "lista1[index].estado",
+    //     id_inscripcion:lista1[index].id_inscripcion,
+    //     id_estudiante:  lista1[index].id_estudiante,
+    //     _id_estudiante:  lista1[index]._id_estudiante,
+    //     fecha_ingreso:  lista1[index].fecha_ingreso,
+    //   }
 
 
-    })
+    // })
 
     for(let i =0 ; i<lista1.length; i++ )
   { lista1[i] = {
@@ -86,6 +90,8 @@ function Inscripciones() {
     estado: lista1[i].estado,
     id_inscripcion:lista1[i].id_inscripcion,
     id_estudiante:  lista1[i].id_estudiante,
+    _id_estudiante:  lista1[i]._id_estudiante,
+    fecha_ingreso:  lista1[i].fecha_ingreso,
   }}
   
     SetInscripciones(lista1);
@@ -98,13 +104,27 @@ function Inscripciones() {
  
   function cambio_ins(e, index) {
     let aux = [...inscripciones];
-      aux[index] = {
+     if(e.target.value == "Aceptada")
+      {
+        aux[index] = {
         // __typename: "inscripciones",
         estado: e.target.value,
         id_inscripcion: inscripciones[index].id_inscripcion,
         id_estudiante: inscripciones[index].id_estudiante,
+        _id_estudiante: inscripciones[index]._id_estudiante,
+          fecha_ingreso : new Date(),
       };
-
+      }
+     else {
+        aux[index] = {
+        // __typename: "inscripciones",
+        estado: e.target.value,
+        id_inscripcion: inscripciones[index].id_inscripcion,
+        id_estudiante: inscripciones[index].id_estudiante,
+        _id_estudiante: inscripciones[index]._id_estudiante,
+          fecha_ingreso : undefined,
+      };
+      }
 
     SetInscripciones(aux);
     Setlista(aux)

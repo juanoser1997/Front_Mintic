@@ -5,6 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
+let aes256 = require('aes256');
 
 
 
@@ -57,7 +58,7 @@ function MiUsuario() {
   
   return (
     <Fragment>
-      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Usuario:{data.usuario.nombre_completo} </h2>
+      <h2 className="te" style={{ textAlign:'center',marginTop:'3%' }}>Usuario : {data.usuario.nombre_completo} </h2>
       <div className="row" style={{ padding:'5%',paddingTop:'1%', paddingBottom:'3%' }}>
        
      
@@ -70,7 +71,7 @@ function MiUsuario() {
           nombre_completo: user.nombre_completo.value,
           identificacion:parseInt(user.identificacion.value),
           correo: user.correo.value,
-          clave: user.clave.value,
+          clave: aes256.encrypt("CLAVEDIFICIL", user.clave.value),
           _id:data.usuario._id
          
         }
@@ -102,11 +103,11 @@ function MiUsuario() {
        
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Contraseña</Form.Label>
-          <Form.Control type="text" input ref={clave => user.clave = clave} defaultValue={data.usuario.clave} />
+          <Form.Control type="text" input ref={clave => user.clave = clave} defaultValue={aes256.decrypt("CLAVEDIFICIL", data.usuario.clave)} />
         </Form.Group>
       </div>
       
-      <div><Button variant="dark" type="submit" style={{ marginLeft: '40%' }} >Editar Usuario</Button></div>
+      <div><Button variant="dark" type="submit" style={{ marginLeft: '44%' }} >Editar Usuario</Button></div>
     </Form>
       </div>
     </Fragment>

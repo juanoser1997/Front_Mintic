@@ -9,7 +9,7 @@ import { useQuery, gql } from "@apollo/client";
 
 const HomePage = () => {
     let usuarioLog = localStorage.getItem("usuarioLog");
-
+const [cuenta, setCuenta] = useState(0)
     const CORREO = gql`
     query usuarioCorreo($usuarioLog: String) {
         usuarioCorreo(correo: $usuarioLog) {
@@ -22,6 +22,8 @@ const HomePage = () => {
     }
   `;
 
+   
+ 
   const { loading, error, data } = useQuery(CORREO, {
     variables: { usuarioLog },
     
@@ -34,11 +36,16 @@ const HomePage = () => {
     localStorage.setItem("identificacion", String(data.usuarioCorreo.identificacion));
     localStorage.setItem("tipo_usuario", String(data.usuarioCorreo.tipo_usuario));
     localStorage.setItem("estado", String(data.usuarioCorreo.estado));
+    if (localStorage.getItem("cuenta") == 0){
+      window.location.href = "/home";
+      window.location.href = "/home";
+      localStorage.setItem("cuenta",1)
+    } 
     
-    
+
     return(
     <div className="container">
-        <h1>
+        <h1 style={{textAlign:"center"}}>
           Bienvenido al sistema de Gestión de Proyectos
         </h1>
     </div>

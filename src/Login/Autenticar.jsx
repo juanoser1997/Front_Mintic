@@ -34,6 +34,7 @@ const Login = () => {
             alert("Usuario y/o contrasena invalida")
         } else {
             localStorage.setItem('auth_token', autenticar.jwt)
+            localStorage.setItem("cuenta",0)
             his.push("/menu")
         }
     }

@@ -10,13 +10,13 @@ function ProyectosHome() {
     rol: localStorage.getItem("tipo_usuario"),
     estado: localStorage.getItem("estado"),
   }
-  if (user.estado === 'Pendiente')
+  if (user.estado === 'Pendiente' || user.estado === 'No autorizado' )
     return <ForbidenComponent></ForbidenComponent>;
-   if (user.rol === 'Estudiante' && user.estado!= 'Pendiente')
+   if (user.rol === 'Estudiante' && user.estado == 'Autorizado' )
     return <ProyectosEstudiante></ProyectosEstudiante>;
-    if (user.rol === 'Líder'  && user.estado!= 'Pendiente')
+    if (user.rol === 'Líder'  && user.estado == 'Autorizado')
     return <ProyectosAdmin></ProyectosAdmin>;
-   if (user.rol === 'Administrador'  && user.estado != 'Pendiente')
+   if (user.rol === 'Administrador'  && user.estado  == 'Autorizado')
     return <ProyectosAdmin></ProyectosAdmin>;
     
    

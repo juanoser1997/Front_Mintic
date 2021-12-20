@@ -12,9 +12,9 @@ function UsuariosHome() {
     rol: localStorage.getItem("tipo_usuario"),
     estado: localStorage.getItem("estado"),
   }
-   if (user.rol === 'lider')
+   if (user.rol === 'Líder')
     return <ListarUsuariosEstudiantes/>;
-   if (user.rol === 'administrador')
+   if (user.rol === 'Administrador')
     return <ListaUsuarios/>;
    if (user.rol === 'Estudiante')
     return <ForbidenComponent></ForbidenComponent>;

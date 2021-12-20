@@ -6,19 +6,39 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 function MisProyectosEstudiante() {
+  var id_estudiante = localStorage.getItem("_id_usuario")
+  const [mostrar, setMostrar]=useState(false)
+  const [encontrada, setEncontrada]=useState(0)
   const PROYECTOS = gql`
-    query {
-      proyectos {
-        lider
+    query MisProyectosEstudiante($id_estudiante: String!) {
+      MisProyectosEstudiante(_id_estudiante: $id_estudiante) {
         nombre
-        presupuesto
         objetivos_generales
+        estado_proyecto
         objetivos_especificos
-        fecha_inicio
+        presupuesto
+        lider
         fase
         _id
+        fecha_inicio
+        inscripciones {
+          estado
+          id_inscripcion
+          id_estudiante
+          _id_estudiante
+          fecha_ingreso
+          fecha_egreso
+          
+      }
+      avances {
+        id_avance
+        fecha_avance
+        descripcion
+        observaciones_lider
+      }
       }
     }
+
   `;
   const [idProyecto, setIdProyecto] = useState("");
   const [nombre, setNombre] = useState("");
@@ -43,11 +63,13 @@ function MisProyectosEstudiante() {
     localStorage.getItem("nombre");
   },[] );
 
-  const { loading, error, data } = useQuery(PROYECTOS);
+  const { loading, error, data } = useQuery(PROYECTOS, {
+    variables: { id_estudiante },
+  });
   if (loading) return <h1>Cargando....</h1>;
   if (error) return <h1>Error</h1>;
 
-  const datosTabla = data.proyectos.map(
+  const datosTabla = data.MisProyectosEstudiante.map(
     ({
       lider,
       nombre,
@@ -55,6 +77,11 @@ function MisProyectosEstudiante() {
       objetivos_generales,
       objetivos_especificos,
       fecha_inicio,
+      fecha_egreso,
+      estado_proyecto,
+      estado,
+      avances,
+      inscripciones,
       fase,
       _id
     }) => (
@@ -67,6 +94,9 @@ function MisProyectosEstudiante() {
                 <ListGroup.Item as="li"> Lider : {lider} </ListGroup.Item>
                 <ListGroup.Item as="li">
                   Presupuesto : {presupuesto}
+                </ListGroup.Item>
+                <ListGroup.Item as="li">
+                  Estado : {estado_proyecto}
                 </ListGroup.Item>
                 <ListGroup.Item as="li">
                   Objetivos Generales : {objetivos_generales}
@@ -82,13 +112,45 @@ function MisProyectosEstudiante() {
                     );
                   })}
                 </ListGroup.Item>
+
+                <ListGroup.Item as="li">
+                 Avances :{" "}
+                  {avances.map((avance) => {
+                    return (
+                      <ul>
+                        {" "}
+                     <b> Avance {avance.id_avance} </b> 
+                        <li>  Descripcion : {avance.descripcion} </li>
+                        <li> Observaciones : {avance.observaciones_lider} </li>
+                        <li>  Fecha :  {avance.fecha_avance != undefined ?new Date(avance.fecha_avance).toLocaleString() : ""} </li>
+                      </ul>
+                    );
+                  })}
+                </ListGroup.Item>
+                <ListGroup.Item as="li">
+                Inscripciones :{" "}
+                  {inscripciones.map((inscripcion) => {
+                    return (
+                      <ul>
+                        {" "}
+                      <b> Inscripcion {inscripcion.id_inscripcion} </b>
+                        <li>  Identificacion Estudiante : {inscripcion.id_estudiante} </li>
+                        <li> Estado : {inscripcion.estado} </li>
+                        <li>  Fecha Ingreso : {inscripcion.fecha_ingreso != undefined ? new Date(inscripcion.fecha_ingreso).toLocaleString() : ""}   </li>
+                        <li>  Fecha Egreso :  {inscripcion.fecha_egreso != undefined ? new Date(inscripcion.fecha_egreso).toLocaleString() : ""} </li>
+
+                      </ul>
+                    );
+                  })}
+                </ListGroup.Item>
                 <ListGroup.Item as="li">
                   Fecha de inicio :{" "}
-                  {new Date(fecha_inicio).toLocaleDateString()}
+                  {fecha_inicio != undefined ? new Date(fecha_inicio).toLocaleDateString() : ""}
                 </ListGroup.Item>
                 <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
 
-                <Link to={'/lista-avances'} > <Button   onClickCapture={(e, id) => { handleEditar(_id, nombre); }} style={{ width:'100%' }} variant="dark">Mirar Avances </Button></Link>
+            { inscripciones.find(ins => (ins._id_estudiante == id_estudiante && ins.fecha_egreso == undefined && ins.estado == 'Aceptada'&& estado_proyecto == "Activo") ) ? <Link to={'/lista-avances'} > <Button   onClickCapture={(e, id) => { handleEditar(_id, nombre); }} style={{ width:'100%' }} variant="dark">Mirar Avances </Button></Link> : <div></div> }
+           
               </ListGroup>
             </Accordion.Body>
           </Accordion.Item>

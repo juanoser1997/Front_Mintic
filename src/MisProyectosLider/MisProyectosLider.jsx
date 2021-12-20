@@ -6,10 +6,10 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 function MisProyectosLider() {
-  var nombre_lider = "Andres"
+  var id_lider = localStorage.getItem("_id_usuario")
   const PROYECTOS = gql`
-    query findLiderProjects($nombre_lider: String!) {
-      findLiderProjects(lider: $nombre_lider) {
+    query findLiderProjects($id_lider: String!) {
+      findLiderProjects(id_lider: $id_lider) {
         nombre
         objetivos_generales
         estado_proyecto
@@ -23,6 +23,7 @@ function MisProyectosLider() {
           estado
           id_inscripcion
           id_estudiante
+          _id_estudiante
           fecha_ingreso
           fecha_egreso
           
@@ -54,7 +55,7 @@ function MisProyectosLider() {
   },[] );
 
   const { loading, error, data } = useQuery(PROYECTOS, {
-    variables: { nombre_lider },
+    variables: { id_lider },
   });
   if (loading) return <h1>Cargando....</h1>;
   if (error) return <h1>Error</h1>;
@@ -109,7 +110,7 @@ function MisProyectosLider() {
                      <b> Avance {avance.id_avance} </b> 
                         <li>  Descripcion : {avance.descripcion} </li>
                         <li> Observaciones : {avance.observaciones_lider} </li>
-                        <li>  Fecha :  { new Date(avance.fecha_avance).toLocaleString()} </li>
+                        <li>  Fecha :  {avance.fecha_avance != undefined ?new Date(avance.fecha_avance).toLocaleString() : ""} </li>
                       </ul>
                     );
                   })}
@@ -123,8 +124,8 @@ function MisProyectosLider() {
                       <b> Inscripcion {inscripcion.id_inscripcion} </b>
                         <li>  Identificacion Estudiante : {inscripcion.id_estudiante} </li>
                         <li> Estado : {inscripcion.estado} </li>
-                        <li>  Fecha Ingreso :  { new Date(inscripcion.fecha_ingreso).toLocaleString()} </li>
-                        <li>  Fecha Egreso :  { new Date(inscripcion.fecha_egreso).toLocaleString()} </li>
+                        <li>  Fecha Ingreso : {inscripcion.fecha_ingreso != undefined ? new Date(inscripcion.fecha_ingreso).toLocaleString() : ""}   </li>
+                        <li>  Fecha Egreso :  {inscripcion.fecha_egreso != undefined ? new Date(inscripcion.fecha_egreso).toLocaleString() : ""} </li>
 
                       </ul>
                     );
@@ -132,13 +133,15 @@ function MisProyectosLider() {
                 </ListGroup.Item>
                 <ListGroup.Item as="li">
                   Fecha de inicio :{" "}
-                  {new Date(fecha_inicio).toLocaleDateString()}
+                  {fecha_inicio != undefined ? new Date(fecha_inicio).toLocaleDateString() : ""}
                 </ListGroup.Item>
                 <ListGroup.Item as="li">Fase : {fase}</ListGroup.Item>
 
            { estado_proyecto =='Activo'? <Link to={'editar-proyecto'}> <Button style={{ width:'100%' }}   onClickCapture={(e, id) => { handleEditar(_id); }} variant="dark">Editar Proyecto </Button> </Link> : <div></div> }
-              <Link to={'/lista-avances-lider'}> <Button style={{ width:'100%' }}  onClickCapture={(e, id) => { handleEditar(_id); }}  variant="primary"> Ver avances </Button></Link> 
-              <Link to={'/inscripciones'}> <Button style={{ width:'100%' }} onClickCapture={(e, id) => { handleEditar(_id); }}  variant="dark">Mirar inscripciones </Button></Link> 
+           { estado_proyecto =='Activo'? <Link to={'/lista-avances-lider'}> <Button style={{ width:'100%' }}  onClickCapture={(e, id) => { handleEditar(_id); }}  variant="primary"> Ver avances </Button></Link>  : <div></div> }
+           { estado_proyecto =='Activo'? <Link to={'/inscripciones'}> <Button style={{ width:'100%' }} onClickCapture={(e, id) => { handleEditar(_id); }}  variant="dark">Mirar inscripciones </Button></Link>  : <div></div> }
+              
+              
               </ListGroup>
             </Accordion.Body>
           </Accordion.Item>

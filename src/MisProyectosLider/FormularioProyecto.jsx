@@ -6,12 +6,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const MUTATION_PROYECTO = gql`
-  mutation creeProyecto($objGe:String,$objEs:String,$presupuesto:Int, $nombreProyecto: String, $lider:String, $fechaIni:Date, $fase:String){
-      createProject(project:{nombre:$nombreProyecto,lider:$lider,objetivos_generales:$objGe,objetivos_especificos:$objEs,presupuesto:$presupuesto, fecha_inicio:$fechaIni, fase:$fase})
+  mutation creeProyecto($objGe:String,$objEs:String,$presupuesto:Int, $nombreProyecto: String, $lider:String, $fechaIni:Date, $fase:String, $id_lider: String){
+      createProject(project:{nombre:$nombreProyecto,lider:$lider,objetivos_generales:$objGe,objetivos_especificos:$objEs,presupuesto:$presupuesto, fecha_inicio:$fechaIni, fase:$fase, id_lider: $id_lider})
   }
 `;
 
 const FormularioProyecto = () => {
+  let nombre_completo = localStorage.getItem("nombre_completo");
   const [creadorDeProyecto] = useMutation(MUTATION_PROYECTO)
   let project = {
     nombreProyecto: "",
@@ -37,13 +38,15 @@ const FormularioProyecto = () => {
         variables: {
           objGe: project.objetivosGenerales.value,
           objEs: project.objetivosEspecificos.value,
+          id_lider: localStorage.getItem("_id_usuario"),
           presupuesto: parseInt(project.presupuesto.value),
           nombreProyecto: project.nombreProyecto.value,
-          lider: project.lider.value,
-          fechaIni: project.fechaInicio.value,
-          fase: project.fase.value
+          lider: nombre_completo,
+          fechaIni: "",
+          fase: ""
         }
       })
+      window.location.href = "/misproyectos-lider";
     }} >
       <div>
         <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -64,33 +67,14 @@ const FormularioProyecto = () => {
           <Form.Control type="text" input ref={objetivosEspecificos => project.objetivosEspecificos = objetivosEspecificos} placeholder="Objetivos Específicos" />
         </Form.Group>
       </div>
-      <div>
-
-       
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-          <Form.Label>Líder</Form.Label>
-          <Form.Control type="text" input ref={lider => project.lider = lider} placeholder="Lider" />
-        </Form.Group>
-      </div>
+     
       <div>
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Presupuesto</Form.Label>
-          <Form.Control type="text" input ref={presupuesto => project.presupuesto = presupuesto} placeholder="Presupuesto" />
+          <Form.Control type="number" input ref={presupuesto => project.presupuesto = presupuesto} placeholder="Presupuesto" />
         </Form.Group>
       </div>
-      <div>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-          <Form.Label>Fecha Inicio</Form.Label>
-          <Form.Control type="date" input ref={fechaInicio => project.fechaInicio = fechaInicio} placeholder="Fecha Inicio" />
-        </Form.Group>
-      </div>
-      <div>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-          <Form.Label>Fase</Form.Label>
-          <Form.Control type="text" input ref={fase => project.fase = fase} placeholder="Fase" />
-        </Form.Group>
-
-      </div>
+      
       <div><Button variant="dark" type="submit" style={{ marginLeft: '40%' }} >Registrar Proyecto</Button></div>
     </form>
   </div>)
