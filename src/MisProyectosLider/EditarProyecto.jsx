@@ -11,6 +11,7 @@ function EditarProyecto() {
 
 
 const [lista,Setlista]= useState([]);
+const [lista1,Setlista1]= useState([]);
 const [cuenta,setCuenta]= useState(0);
 
 
@@ -51,8 +52,9 @@ const [cuenta,setCuenta]= useState(0);
     _id:idProyecto,
   }
   if(cuenta==0){
-    Setlista( data.getProjectId.objetivos_especificos)
+    Setlista( data.getProjectId.objetivos_especificos.slice())
     setCuenta(1)
+    Setlista1(data.getProjectId.objetivos_especificos.slice())
   }
 
  
@@ -69,6 +71,21 @@ function agregarObjetivo(){
   project.objetivos_especificos.push("nuevo Objetivo")
    Setlista(project.objetivos_especificos)
    console.log(lista)
+}
+function borrarObjetivo(index){
+let obj =project.objetivos_especificos.slice()
+
+console.log(lista1)
+  obj.splice(index,1)
+  // project.objetivos_especificos.splice(index,1)
+ 
+
+   Setlista1(obj)
+   Setlista(lista1)
+   console.log(index)
+   console.log(obj)
+   console.log(lista)
+   console.log(lista1)
 }
   return (
     <Fragment>
@@ -101,9 +118,9 @@ function agregarObjetivo(){
         <Form.Group className="mb-3" controlId="formGroupPassword">
         <Form.Label>Objetivo Especifico</Form.Label>
           {lista.map((objetivo, index)=>{
-          return  ( <div> <Form.Control  onChangeCapture={(e)=> cambio_objetivos(e,index)} style={{marginTop: '1%'}} type="text" defaultValue={objetivo} /> </div> )
+          return  ( <span> <br /><span> <Form.Control  onChangeCapture={(e)=> cambio_objetivos(e,index)} style={{marginTop: '1%' , width : "70%", display: "inline"}} type="text" defaultValue={objetivo} /> </span> <span><Button variant="dark" style={{ marginLeft:'2%' , marginBottom : '0.5%'}} onClickCapture={()=>borrarObjetivo(index)} > Borrar objetivo </Button> </span> <br /></span> )
           })}
-           <Button variant="dark" style={{ marginLeft:'40%' , marginTop : '2%'}} onClickCapture={agregarObjetivo} > agregar objetivo especifico </Button>
+           <Button variant="dark" style={{ marginLeft:'40%' , marginTop : '2%' ,marginRight : "0%"}} onClickCapture={agregarObjetivo} > agregar objetivo especifico </Button>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupPassword">
           <Form.Label>Presupuesto</Form.Label>

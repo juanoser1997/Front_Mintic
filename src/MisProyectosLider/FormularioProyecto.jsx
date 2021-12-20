@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const MUTATION_PROYECTO = gql`
-  mutation creeProyecto($objGe:String,$objEs:String,$presupuesto:Int, $nombreProyecto: String, $lider:String, $fechaIni:Date, $fase:String, $id_lider: String){
+  mutation creeProyecto($objGe:String,$objEs:[String],$presupuesto:Int, $nombreProyecto: String, $lider:String, $fechaIni:Date, $fase:String, $id_lider: String){
       createProject(project:{nombre:$nombreProyecto,lider:$lider,objetivos_generales:$objGe,objetivos_especificos:$objEs,presupuesto:$presupuesto, fecha_inicio:$fechaIni, fase:$fase, id_lider: $id_lider})
   }
 `;
@@ -37,7 +37,7 @@ const FormularioProyecto = () => {
       creadorDeProyecto({
         variables: {
           objGe: project.objetivosGenerales.value,
-          objEs: project.objetivosEspecificos.value,
+          objEs: project.objetivosEspecificos.value.split("/"),
           id_lider: localStorage.getItem("_id_usuario"),
           presupuesto: parseInt(project.presupuesto.value),
           nombreProyecto: project.nombreProyecto.value,
@@ -46,7 +46,9 @@ const FormularioProyecto = () => {
           fase: ""
         }
       })
-      window.location.href = "/misproyectos-lider";
+      console.log(project.objetivosEspecificos.value.split("/"))
+     window.location.href = "/misproyectos-lider";
+     alert("Proyecto " + project.nombreProyecto.value+" Creado" )
     }} >
       <div>
         <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -65,6 +67,9 @@ const FormularioProyecto = () => {
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Objetivos Específicos</Form.Label>
           <Form.Control type="text" input ref={objetivosEspecificos => project.objetivosEspecificos = objetivosEspecificos} placeholder="Objetivos Específicos" />
+          <Form.Text className="text-muted">
+     Separe cada objetivo usando un slash "/" ; ej: obj 1<b>/</b>obj 2<b>/</b> obj 3<b>/</b>obj4...
+    </Form.Text>
         </Form.Group>
       </div>
      
